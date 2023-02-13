@@ -190,7 +190,30 @@ class BankAccountTest {
         //call check money total after each to ensure there is the right amount of $
         //withdraw a varying amount of money from each account
         //call check money total after each to ensure it is upated correctly
-        //then transfers ...
+        //transfer money from some bank accounts to other bank accounts and ensure bank total stays the same
+        //freeze and unfreeze some accounts and ensure money stays the same
+        //close some accounts and check if the money was removed from the bank
+    }
+
+    @Test
+    void accountsTest(){
+        //create lots of accounts, each iteration checking that it was added
+        //freeze and unfreeze some accounts, ensure that # of accounts does not change
+        //report some suspicious accounts, ensure that # of accounts does not change
+        //close out each account, making sure each was actually closed
+    }
+
+    @Test
+    void reportSuspiciousAccountsTest(){
+        //??
+    }
+
+    @Test
+    void freezeUnfreezeAccountTest(){
+        //create a bunch of accounts, freezing and unfreezing as you go and ensuring that they stayed frozen/unfrozen
+        //ensure if accounts are frozen, they cannot withdraw, deposit, or transfer
+        //report suspicious accounts and ensure they do not freeze by themselves
+        //close accounts and ensure they arent still listed as frozen/unfrozen
     }
 
 
