@@ -205,7 +205,10 @@ class BankAccountTest {
 
     @Test
     void reportSuspiciousAccountsTest(){
-        //??
+        //create a bunch of accounts and add it to report suspicious accounts, ensuring that the method is returning everything
+        //correctly in a list
+        //ensure if you pass invalid id in it throws an error
+        //remove a bunch of accounts from the list and check if they are there anymore
     }
 
     @Test
@@ -214,6 +217,7 @@ class BankAccountTest {
         //ensure if accounts are frozen, they cannot withdraw, deposit, or transfer
         //report suspicious accounts and ensure they do not freeze by themselves
         //close accounts and ensure they arent still listed as frozen/unfrozen
+         //ensure if you pass invalid id in it throws an error
     }
 
 
