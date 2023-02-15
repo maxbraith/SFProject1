@@ -193,6 +193,7 @@ class BankAccountTest {
         //transfer money from some bank accounts to other bank accounts and ensure bank total stays the same
         //freeze and unfreeze some accounts and ensure money stays the same
         //close some accounts and check if the money was removed from the bank
+        int i =50;
     }
 
     @Test
