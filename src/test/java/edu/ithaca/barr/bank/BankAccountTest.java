@@ -1,5 +1,9 @@
 package edu.ithaca.barr.bank;
 import org.junit.jupiter.api.Test;
+
+import edu.ithaca.barr.bank.Account.BankAccount;
+import edu.ithaca.barr.bank.Account.InsufficientFundsException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -189,7 +193,7 @@ class BankAccountTest {
         //create a bunch of accounts with varying amount of money in them
         //call check money total after each to ensure there is the right amount of $
         //withdraw a varying amount of money from each account
-        //call check money total after each to ensure it is upated correctly
+        //call check money total after each to ensure it is updated correctly
         //transfer money from some bank accounts to other bank accounts and ensure bank total stays the same
         //freeze and unfreeze some accounts and ensure money stays the same
         //close some accounts and check if the money was removed from the bank
