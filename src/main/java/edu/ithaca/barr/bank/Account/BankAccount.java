@@ -3,6 +3,7 @@ package edu.ithaca.barr.bank.Account;
 public class BankAccount {
 
     private String email;
+    private String password;
     private double balance;
 
     /**
@@ -31,6 +32,14 @@ public class BankAccount {
      */
     public double getBalance(){
         return balance;
+    }
+
+    /**
+     * Getter for password
+     * @return the password of the bank account
+     */
+    public String getPassword(){
+        return password;
     }
 
     /**

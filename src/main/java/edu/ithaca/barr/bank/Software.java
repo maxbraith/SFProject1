@@ -13,13 +13,13 @@ public interface Software { //should this be a superclass instead?
      * @param password - password associated with the account
      * @return TRUE if credentials are valid. FALSE if not
     */
-    boolean confirmCredentials(String email, String password);
+    boolean confirmCredentials(BankAccount account, String email, String password);
 
     /** 
      * @post checks balance in account
      * @return balance
      */
-    double checkBalance();
+    double checkBalance(BankAccount account);
 
     /**
      * @post withdraws a given amount from account balance
@@ -47,7 +47,7 @@ public interface Software { //should this be a superclass instead?
      * @throws InvalidArgumentException if amount is not valid
      * @throws InsufficientBalance if amount>balance for either account
      */
-    void transfer(double amount, BankAccount transferAccount);
+    public void transfer(double amount, BankAccount transferAccount1, BankAccount transferAccount2);
 
     /**
      * @post collects transaction history of an account
