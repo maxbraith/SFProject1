@@ -2,7 +2,7 @@ package edu.ithaca.barr.bank;
 
 import java.util.Queue;
 
-import edu.ithaca.barr.bank.Account.BankAccount;
+import edu.ithaca.barr.bank.account.BankAccount;
 
 public interface Software { //should this be a superclass instead?
 

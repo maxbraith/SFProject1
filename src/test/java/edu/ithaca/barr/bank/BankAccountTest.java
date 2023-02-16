@@ -1,8 +1,8 @@
 package edu.ithaca.barr.bank;
 import org.junit.jupiter.api.Test;
 
-import edu.ithaca.barr.bank.Account.BankAccount;
-import edu.ithaca.barr.bank.Account.InsufficientFundsException;
+import edu.ithaca.barr.bank.account.BankAccount;
+import edu.ithaca.barr.bank.account.InsufficientFundsException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
