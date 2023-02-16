@@ -1,4 +1,4 @@
-package edu.ithaca.barr.bank.Account;
+package edu.ithaca.barr.bank.account;
 
 public class SavingsAccount {
     
