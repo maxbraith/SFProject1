@@ -1,4 +1,4 @@
-package edu.ithaca.barr.bank.Teller;
+package edu.ithaca.barr.bank.teller;
 
 public class BankTeller {
     

@@ -1,8 +1,10 @@
 package edu.ithaca.barr.bank;
 import org.junit.jupiter.api.Test;
 
-import edu.ithaca.barr.bank.Account.BankAccount;
-import edu.ithaca.barr.bank.Account.InsufficientFundsException;
+import edu.ithaca.barr.bank.account.BankAccount;
+import edu.ithaca.barr.bank.account.CheckingAccount;
+import edu.ithaca.barr.bank.account.InsufficientFundsException;
+import edu.ithaca.barr.bank.account.SavingsAccount;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -227,5 +229,83 @@ class BankAccountTest {
          //ensure if you pass invalid id in it throws an error
     }
 
+    @Test
+    void transactionHistoryTest() throws InsufficientFundsException{
+        CheckingAccount testAccount = new CheckingAccount(200);
+        CheckingAccount testAccount2 = new CheckingAccount(0);
+        testAccount.deposit(100);
+        assertEquals("Deposited 100.0\n", testAccount.historyToString());
+        testAccount.deposit(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\n", testAccount.historyToString());
+        testAccount.withdraw(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\n", testAccount.historyToString());
+        testAccount.transfer(100, testAccount2);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\nWithdrew 100.0\n", testAccount.historyToString());
+        assertEquals("Deposited 100.0\n", testAccount2.historyToString());
 
+        SavingsAccount testAccount3 = new SavingsAccount(200,1000,10);
+        SavingsAccount testAccount4 = new SavingsAccount(0,1000,10);
+        testAccount3.deposit(100);
+        assertEquals("Deposited 100.0\n", testAccount3.historyToString());
+        testAccount3.deposit(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\n", testAccount3.historyToString());
+        testAccount3.withdraw(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\n", testAccount3.historyToString());
+        testAccount3.transfer(100, testAccount4);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\nWithdrew 100.0\n", testAccount3.historyToString());
+        assertEquals("Deposited 100.0\n", testAccount4.historyToString());
+    }
+
+    @Test
+    void isNumberValidTest() {
+        // checks to see if a double has two decimals or less
+        assertTrue(CheckingAccount.isNumberValid(100));
+        assertTrue(CheckingAccount.isNumberValid(100.1));
+        assertTrue(CheckingAccount.isNumberValid(100.11));
+        assertFalse(CheckingAccount.isNumberValid(100.111));
+
+        // amount is a positive number
+        assertTrue(CheckingAccount.isNumberValid(10));
+        assertFalse(CheckingAccount.isNumberValid(-10));
+        assertFalse(CheckingAccount.isNumberValid(-100));
+    }
+
+    @Test
+    void withdrawLimitTest() throws InsufficientFundsException {
+        SavingsAccount bankAccount = new SavingsAccount(500, 300, 10.0);
+        bankAccount.withdraw(300);
+        assertEquals(200, bankAccount.getBalance(), 0.001);
+
+        // Withdraw limit exceeded
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(300));
+
+        // Negative number withdrawn
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-100));
+
+        // Too many decimal places
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.999));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.001));
+
+        // Balance does not change when an excepetion is thrown
+        assertEquals(200, bankAccount.getBalance());
+        // Remaining Withdraw Limit Can be 0.
+        assertEquals(0,bankAccount.getRemainingWithdraw());
+        //Reset Withdraw Limit
+        bankAccount.resetWithdrawLimit();
+        assertEquals(300, bankAccount.getRemainingWithdraw());        
+        assertEquals(200,bankAccount.getBalance());
+        //Insuficcient Funds Exception
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
+
+    }
+
+    @Test
+    void interestTest(){
+        SavingsAccount bankAccount = new SavingsAccount( 200, 500, 10.0);
+        assertEquals(10, bankAccount.getInterest());
+        assertEquals(20, bankAccount.calculateInterest());
+        bankAccount.addInterest();
+        assertEquals(220, bankAccount.getBalance());
+    }
 }
+
