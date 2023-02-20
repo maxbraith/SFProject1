@@ -4,6 +4,7 @@ import java.util.Queue;
 import edu.ithaca.barr.bank.Software;
 import edu.ithaca.barr.bank.Account.BankAccount;
 import edu.ithaca.barr.bank.Account.InsufficientFundsException;
+import edu.ithaca.barr.bank.BankAdminSystem.BankAdminSoftware;
 
 //Class name Bank Teller, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
@@ -97,7 +98,14 @@ public class BankTeller implements Software{ //still need to implement history, 
      * @throws InvalidArgumentException if email or starting balance is not valid, if email already exists in system
      */
     private void createAccount(String email, String password, double startingBalance){
-        //need to implement
+        for (int i=0; i<BankAdminSoftware.accounts.size(); i++){
+            if (BankAdminSoftware.accounts[i].getEmail()==email){
+                throw new IllegalArgumentException("Email already exists in system");
+            }
+        }
+        BankAccount account = new BankAccount(email, password, startingBalance);
+        BankAdminSoftware.accounts.add(account);
+        
     }
 
     /**
