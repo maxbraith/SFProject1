@@ -9,7 +9,7 @@ public class Customer {
     private AbstractAccount savingsAccount;
     private AbstractAccount checkingAccount;
 
-    public Customer(String password, int customerId){
+    public Customer(int customerId, String password){
         this.customerId = customerId;
         this.password = password;
         savingsAccount = null;
@@ -39,5 +39,17 @@ public class Customer {
 
     private double getCheckingAccountBalance() {
         return 0;
+    }
+
+    public void withdrawCheckingAccount(double amount) {
+    }
+
+    public void withdrawSavingsAccount(double amount) {
+    }
+
+    public void depositCheckingAccount(double amount) {
+    }
+
+    public void depositSavingsAccount(double amount) {
     }
 }
