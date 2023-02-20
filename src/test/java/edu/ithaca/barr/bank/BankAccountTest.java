@@ -183,7 +183,7 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("test@mail.com", 10.001));
     }
 
-    //Bank System Tests
+    //Bank System Tests --written but need to implement
     @Test
     void checkMoneyTotalTest(){
         //create bunch of accounts with 0$ in each
