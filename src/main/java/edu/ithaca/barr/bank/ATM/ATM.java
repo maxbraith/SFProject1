@@ -3,7 +3,6 @@ package edu.ithaca.barr.bank.ATM;
 import edu.ithaca.barr.bank.Software;
 
 import java.util.Queue;
-import edu.ithaca.barr.bank.Software;
 import edu.ithaca.barr.bank.Account.BankAccount;
 import edu.ithaca.barr.bank.Account.InsufficientFundsException;
 
