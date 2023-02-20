@@ -2,10 +2,13 @@ package edu.ithaca.barr.bank;
 
 import java.util.Queue;
 
-import edu.ithaca.barr.bank.account.BankAccount;
+import edu.ithaca.barr.bank.Account.BankAccount;
+import edu.ithaca.barr.bank.Account.InsufficientFundsException;
 
-public interface Software { //should this be a superclass instead?
+public interface Software { //still have to make a superclass instead of interface
 
+    //Class name Bank Teller, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
+    //Written By Giovanni Cioffi 19-Feb-2023
 
     /**
      * @post confirm user's credentials are valid
@@ -13,13 +16,13 @@ public interface Software { //should this be a superclass instead?
      * @param password - password associated with the account
      * @return TRUE if credentials are valid. FALSE if not
     */
-    boolean confirmCredentials(String email, String password);
+    boolean confirmCredentials(BankAccount account, String email, String password);
 
     /** 
      * @post checks balance in account
      * @return balance
      */
-    double checkBalance();
+    double checkBalance(BankAccount account);
 
     /**
      * @post withdraws a given amount from account balance
@@ -28,7 +31,7 @@ public interface Software { //should this be a superclass instead?
      * @throws InvalidArgumentException if amount is not valid
      * @throws AccountFrozen exception if account is frozen
      */
-    void withdraw(double amount);
+    void withdraw(BankAccount account, double amount) throws InsufficientFundsException;
     
     /**
      * @post deposits a given amount to account balance
@@ -36,7 +39,7 @@ public interface Software { //should this be a superclass instead?
      * @throws InvalidArgumentException if amount is not valid
      * @throws AccountFrozen exception if account is frozen
      */
-    void deposit(double amount);
+    void deposit(BankAccount account, double amount);
 
     /**
      * @post transfers a given amount from account to given account
@@ -47,7 +50,7 @@ public interface Software { //should this be a superclass instead?
      * @throws InvalidArgumentException if amount is not valid
      * @throws InsufficientBalance if amount>balance for either account
      */
-    void transfer(double amount, BankAccount transferAccount);
+    public void transfer(double amount, BankAccount transferAccount1, BankAccount transferAccount2) throws InsufficientFundsException;
 
     /**
      * @post collects transaction history of an account
