@@ -2,8 +2,8 @@ package edu.ithaca.barr.bank;
 
 import java.util.Queue;
 
-import edu.ithaca.barr.bank.Account.BankAccount;
-import edu.ithaca.barr.bank.Account.InsufficientFundsException;
+import edu.ithaca.barr.bank.account.BankAccount;
+import edu.ithaca.barr.bank.account.InsufficientFundsException;
 
 public interface Software { //still have to make a superclass instead of interface
 
@@ -27,6 +27,7 @@ public interface Software { //still have to make a superclass instead of interfa
     /**
      * @post withdraws a given amount from account balance
      * @param amount - amount to withdraw from balance
+     * @throws edu.ithaca.barr.bank.account.InsufficientFundsException
      * @throws InsufficientBalance if amount>balance
      * @throws InvalidArgumentException if amount is not valid
      * @throws AccountFrozen exception if account is frozen
@@ -45,6 +46,7 @@ public interface Software { //still have to make a superclass instead of interfa
      * @post transfers a given amount from account to given account
      * @param transferAccount - account to deposit amount into
      * @param amount - amount of money to withdraw and transfer
+     * @throws edu.ithaca.barr.bank.account.InsufficientFundsException
      * @throws AccountFrozen exception if account is frozen
      * @throws AccountNotValid exception if passed account is not valid 
      * @throws InvalidArgumentException if amount is not valid

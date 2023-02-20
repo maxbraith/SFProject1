@@ -2,7 +2,9 @@ package edu.ithaca.barr.bank;
 import org.junit.jupiter.api.Test;
 
 import edu.ithaca.barr.bank.account.BankAccount;
+import edu.ithaca.barr.bank.account.CheckingAccount;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
+import edu.ithaca.barr.bank.account.SavingsAccount;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,21 +13,21 @@ class BankAccountTest {
 
     @Test
     void getBalanceTest() {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        BankAccount bankAccount = new BankAccount("a@b.com", null, 200);
 
         assertEquals(200, bankAccount.getBalance(), 0.001);
 
         //Equivalence class: have money in bank account account
         assertEquals(200, bankAccount.getBalance());
         //Equivalence class: have no money in bank account
-        BankAccount bankAccount1 = new BankAccount("apple@pie.com", 0);
+        BankAccount bankAccount1 = new BankAccount("apple@pie.com", null, 0);
         assertEquals(0, bankAccount1.getBalance());
 
     }
 
     @Test
     void withdrawTest() throws InsufficientFundsException{
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        BankAccount bankAccount = new BankAccount("a@b.com", null, 200);
         bankAccount.withdraw(100);
 
         assertEquals(100, bankAccount.getBalance(), 0.001);
@@ -50,7 +52,7 @@ class BankAccountTest {
         assertEquals(0, bankAccount.getBalance());
 
         //Equivalence case: amount has decimal with more then 2 places
-        BankAccount bankAccount2 = new BankAccount("test@mail.com", 50);
+        BankAccount bankAccount2 = new BankAccount("test@mail.com", null, 50);
         assertThrows(IllegalArgumentException.class, ()->bankAccount2.withdraw(0.001));
 
     }
@@ -127,7 +129,7 @@ class BankAccountTest {
 
     @Test
     void depositTest(){
-        BankAccount bankAccount = new BankAccount("test@mail.com", 100);
+        BankAccount bankAccount = new BankAccount("test@mail.com", null, 100);
 
         //Equivalence class: amount is positive
         bankAccount.deposit(100);
@@ -147,8 +149,8 @@ class BankAccountTest {
     @Test
     void transferTest() throws InsufficientFundsException{
         //make two bank accounts, so we can test if the money in one can be transferred to another
-        BankAccount bankAccount = new BankAccount("test@mail.com", 100);
-        BankAccount transferAccount = new BankAccount("a@b.com", 0);
+        BankAccount bankAccount = new BankAccount("test@mail.com", null, 100);
+        BankAccount transferAccount = new BankAccount("a@b.com", null, 0);
 
         //Equivalence class: transfer less money then account balance into the other account
         bankAccount.transfer(transferAccount,50);
@@ -170,17 +172,17 @@ class BankAccountTest {
 
     @Test
     void constructorTest() {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        BankAccount bankAccount = new BankAccount("a@b.com", null, 200);
 
         assertEquals("a@b.com", bankAccount.getEmail());
         assertEquals(200, bankAccount.getBalance(), 0.001);
         //check for exception thrown correctly
-        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", null, 100));
 
         //Equivalence class: negative amount in bank account
-        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("test@mail.com", -10));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("test@mail.com", null, -10));
         //Equivalence class: amount has more then 2 decimal places
-        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("test@mail.com", 10.001));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("test@mail.com", null, 10.001));
     }
 
     //Bank System Tests --written but need to implement
@@ -227,5 +229,83 @@ class BankAccountTest {
          //ensure if you pass invalid id in it throws an error
     }
 
+    @Test
+    void transactionHistoryTest() throws InsufficientFundsException{
+        CheckingAccount testAccount = new CheckingAccount(200);
+        CheckingAccount testAccount2 = new CheckingAccount(0);
+        testAccount.deposit(100);
+        assertEquals("Deposited 100.0\n", testAccount.historyToString());
+        testAccount.deposit(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\n", testAccount.historyToString());
+        testAccount.withdraw(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\n", testAccount.historyToString());
+        testAccount.transfer(100, testAccount2);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\nWithdrew 100.0\n", testAccount.historyToString());
+        assertEquals("Deposited 100.0\n", testAccount2.historyToString());
 
+        SavingsAccount testAccount3 = new SavingsAccount(200,1000,10);
+        SavingsAccount testAccount4 = new SavingsAccount(0,1000,10);
+        testAccount3.deposit(100);
+        assertEquals("Deposited 100.0\n", testAccount3.historyToString());
+        testAccount3.deposit(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\n", testAccount3.historyToString());
+        testAccount3.withdraw(100);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\n", testAccount3.historyToString());
+        testAccount3.transfer(100, testAccount4);
+        assertEquals("Deposited 100.0\nDeposited 100.0\nWithdrew 100.0\nWithdrew 100.0\n", testAccount3.historyToString());
+        assertEquals("Deposited 100.0\n", testAccount4.historyToString());
+    }
+
+    @Test
+    void isNumberValidTest() {
+        // checks to see if a double has two decimals or less
+        assertTrue(CheckingAccount.isNumberValid(100));
+        assertTrue(CheckingAccount.isNumberValid(100.1));
+        assertTrue(CheckingAccount.isNumberValid(100.11));
+        assertFalse(CheckingAccount.isNumberValid(100.111));
+
+        // amount is a positive number
+        assertTrue(CheckingAccount.isNumberValid(10));
+        assertFalse(CheckingAccount.isNumberValid(-10));
+        assertFalse(CheckingAccount.isNumberValid(-100));
+    }
+
+    @Test
+    void withdrawLimitTest() throws InsufficientFundsException {
+        SavingsAccount bankAccount = new SavingsAccount(500, 300, 10.0);
+        bankAccount.withdraw(300);
+        assertEquals(200, bankAccount.getBalance(), 0.001);
+
+        // Withdraw limit exceeded
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(300));
+
+        // Negative number withdrawn
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-100));
+
+        // Too many decimal places
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.999));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.001));
+
+        // Balance does not change when an excepetion is thrown
+        assertEquals(200, bankAccount.getBalance());
+        // Remaining Withdraw Limit Can be 0.
+        assertEquals(0,bankAccount.getRemainingWithdraw());
+        //Reset Withdraw Limit
+        bankAccount.resetWithdrawLimit();
+        assertEquals(300, bankAccount.getRemainingWithdraw());        
+        assertEquals(200,bankAccount.getBalance());
+        //Insuficcient Funds Exception
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
+
+    }
+
+    @Test
+    void interestTest(){
+        SavingsAccount bankAccount = new SavingsAccount( 200, 500, 10.0);
+        assertEquals(10, bankAccount.getInterest());
+        assertEquals(20, bankAccount.calculateInterest());
+        bankAccount.addInterest();
+        assertEquals(220, bankAccount.getBalance());
+    }
 }
+
