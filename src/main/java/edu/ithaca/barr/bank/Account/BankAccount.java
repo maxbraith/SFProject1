@@ -1,15 +1,16 @@
-package edu.ithaca.barr.bank.account;
+package edu.ithaca.barr.bank.Account;
 
 public class BankAccount {
 
     private String email;
-    private double balance;
+    private String password;
+    public double balance;
 
     /**
      * Constructor for BankAccount
      * @throws IllegalArgumentException if email is invalid 
      */
-    public BankAccount(String email, double startingBalance){
+    public BankAccount(String email, String password, double startingBalance){
         //make sure email is valid
         if (isEmailValid(email)){
             this.email = email;
@@ -31,6 +32,14 @@ public class BankAccount {
      */
     public double getBalance(){
         return balance;
+    }
+
+    /**
+     * Getter for password
+     * @return the password of the bank account
+     */
+    public String getPassword(){
+        return password;
     }
 
     /**
