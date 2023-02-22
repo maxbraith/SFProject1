@@ -1,10 +1,10 @@
 package edu.ithaca.barr.bank.atm;
 
 import edu.ithaca.barr.bank.Software;
-
-import java.util.Queue;
 import edu.ithaca.barr.bank.account.BankAccount;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
+
+import java.util.Queue;
 
 //Class name ATM, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
