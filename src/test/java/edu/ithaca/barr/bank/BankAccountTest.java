@@ -307,5 +307,11 @@ class BankAccountTest {
         bankAccount.addInterest();
         assertEquals(220, bankAccount.getBalance());
     }
+
+    //Customer Method Tests
+    @Test
+    void customerTest(){
+        
+    }
 }
 
