@@ -31,6 +31,22 @@ public class Customer {
      */
     public void setCheckingsAccount(CheckingAccount checkingAccountIn){
     }
+
+    /**
+     * @post returns the savings account associated with the customer
+     * @return SavingsAccount object
+     */
+    public SavingsAccount getSavingsAccount(){
+        return null;
+    }
+
+    /**
+     * @post returns the checking account associated with the customer
+     * @return checking account object
+     */
+    public CheckingAccount getCheckingAccount(){
+        return null;
+    }
     
     /**
      * Returns the Customers total balance
