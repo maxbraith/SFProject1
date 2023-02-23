@@ -5,8 +5,11 @@ import edu.ithaca.barr.bank.account.BankAccount;
 import edu.ithaca.barr.bank.account.CheckingAccount;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
 import edu.ithaca.barr.bank.account.SavingsAccount;
+import edu.ithaca.barr.bank.atm.ATM;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
 
 
 class BankAccountTest {
@@ -307,5 +310,43 @@ class BankAccountTest {
         bankAccount.addInterest();
         assertEquals(220, bankAccount.getBalance());
     }
+
+    private ATM atm;
+    private BankAccount account;
+
+    @BeforeEach
+    //Integration Test - Matt 
+    void setUp() {
+        atm = new ATM();
+        account = new BankAccount("johndoe@example.com", "password", 1000.0);
+    }
+
+    @Test
+    void testWithdraw() throws InsufficientFundsException {
+        // Withdraw some money from the account using the ATM
+        atm.withdraw(account, 500.0);
+        // Check that the account balance was updated correctly
+        assertEquals(500.0, account.getBalance(), 0.01);
+    }
+
+    @Test
+    void testDeposit() {
+        // Deposit some money into the account using the ATM
+        atm.deposit(account, 500.0);
+        // Check that the account balance was updated correctly
+        assertEquals(1500.0, account.getBalance(), 0.01);
+    }
+
+    @Test
+    void testTransfer() throws InsufficientFundsException {
+        // Create a second bank account to transfer money to
+        BankAccount otherAccount = new BankAccount("janedoe@example.com", "password", 500.0);
+        // Transfer some money from the first account to the second account using the ATM
+        atm.transfer(250.0, account, otherAccount);
+        // Check that the balances of both accounts were updated correctly
+        assertEquals(750.0, account.getBalance(), 0.01);
+        assertEquals(750.0, otherAccount.getBalance(), 0.01);
+    }
 }
+
 
