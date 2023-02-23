@@ -56,5 +56,5 @@ public interface Software { //still have to make a superclass instead of interfa
      * @post collects transaction history of an account
      * @return List of previous transactions
      */
-    Queue<String> checkHistory();
+    String checkHistory(BankAccount account);
 }

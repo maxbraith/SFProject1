@@ -85,9 +85,8 @@ public class BankTeller implements Software{ //still need to implement history, 
      * @post collects transaction history of an account
      * @return List of previous transactions
      */
-    public Queue<String> checkHistory(){
-        //still have to implement
-        return null;
+    public String checkHistory(BankAccount account){
+        //return account.historyToString();
     }
 
     /**
@@ -113,8 +112,19 @@ public class BankTeller implements Software{ //still need to implement history, 
      * @param ID - ID for specific account to remove
      * @throws InvalidArgumentException if account does not exist
      */
-    private void closeAccount(String ID){
-        //need to implement
+    private void closeAccount(BankAccount account){
+       if (account.getBalance()>0){
+            BankAdminSoftware.accounts.remove(account);
+            if (BankAdminSoftware.suspiciousAccounts.contains(account)){
+                BankAdminSoftware.suspiciousAccounts.remove(account);
+            }
+            if (BankAdminSoftware.frozenAccounts.contains(account)){
+                BankAdminSoftware.frozenAccounts.remove(account);
+            }
+       }
+       else{
+        throw new IllegalArgumentException("Need to empty account first");
+       }
     }
 
 }

@@ -84,9 +84,8 @@ public class ATM implements Software{
      * @post collects transaction history of an account
      * @return List of previous transactions
      */
-    public Queue<String> checkHistory(){
-        //still have to implement
-        return null;
+    public String checkHistory(BankAccount account){
+        //return account.historyToString();
     }
 
 }
