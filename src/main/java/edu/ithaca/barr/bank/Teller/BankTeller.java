@@ -9,7 +9,7 @@ import edu.ithaca.barr.bank.BankAdminSystem.BankAdminSoftware;
 //Class name Bank Teller, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
 //should password have multiple requirements too?
-public class BankTeller implements Software{ //still need to implement history, make it into a subclass, and write create/close account methods
+public class BankTeller implements Software{ 
     
     /**
      * @post confirm user's credentials are valid
