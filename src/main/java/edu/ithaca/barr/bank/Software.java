@@ -5,7 +5,7 @@ import java.util.Queue;
 import edu.ithaca.barr.bank.account.BankAccount;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
 
-public interface Software { //still have to make a superclass instead of interface
+public interface Software { 
 
     //Class name Bank Teller, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
     //Written By Giovanni Cioffi 19-Feb-2023
@@ -58,5 +58,5 @@ public interface Software { //still have to make a superclass instead of interfa
      * @post collects transaction history of an account
      * @return List of previous transactions
      */
-    Queue<String> checkHistory();
+    String checkHistory(BankAccount account);
 }

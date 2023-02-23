@@ -12,7 +12,7 @@ import edu.ithaca.barr.bank.account.InsufficientFundsException;
 //Class name Bank Teller, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
 //should password have multiple requirements too?
-public class BankTeller implements Software{ //still need to implement history, make it into a subclass, and write create/close account methods
+public class BankTeller implements Software{ 
     
     /**
      * @post confirm user's credentials are valid
@@ -88,9 +88,8 @@ public class BankTeller implements Software{ //still need to implement history, 
      * @post collects transaction history of an account
      * @return List of previous transactions
      */
-    public Queue<String> checkHistory(){
-        //still have to implement
-        return null;
+    public String checkHistory(BankAccount account){
+        //return account.historyToString();
     }
 
     /**
@@ -101,7 +100,14 @@ public class BankTeller implements Software{ //still need to implement history, 
      * @throws InvalidArgumentException if email or starting balance is not valid, if email already exists in system
      */
     private void createAccount(String email, String password, double startingBalance){
-        //need to implement
+        for (int i=0; i<BankAdminSoftware.accounts.size(); i++){
+            if (BankAdminSoftware.accounts[i].getEmail()==email){
+                throw new IllegalArgumentException("Email already exists in system");
+            }
+        }
+        BankAccount account = new BankAccount(email, password, startingBalance);
+        BankAdminSoftware.accounts.add(account);
+        
     }
 
     /**
@@ -109,8 +115,19 @@ public class BankTeller implements Software{ //still need to implement history, 
      * @param ID - ID for specific account to remove
      * @throws InvalidArgumentException if account does not exist
      */
-    private void closeAccount(String ID){
-        //need to implement
+    private void closeAccount(BankAccount account){
+       if (account.getBalance()>0){
+            BankAdminSoftware.accounts.remove(account);
+            if (BankAdminSoftware.suspiciousAccounts.contains(account)){
+                BankAdminSoftware.suspiciousAccounts.remove(account);
+            }
+            if (BankAdminSoftware.frozenAccounts.contains(account)){
+                BankAdminSoftware.frozenAccounts.remove(account);
+            }
+       }
+       else{
+        throw new IllegalArgumentException("Need to empty account first");
+       }
     }
 
 }
