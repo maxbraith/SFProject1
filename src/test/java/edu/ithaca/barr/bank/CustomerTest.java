@@ -18,19 +18,70 @@ public class CustomerTest {
     @Test
     void setSavingsAccountTest(){
         Customer testCustomer = new Customer(111, "111");
-        AbstractAccount testAccount = new SavingsAccount(500, 500, 0);
-        assertEquals(testCustomer.savingsAccount, )
+        SavingsAccount testAccount = new SavingsAccount(500, 500, 0);
+        //Equivalence Partition - savings account is null
+        assertEquals(testCustomer.getSavingsAccount(), null);
+        testCustomer.setSavingsAccount(testAccount);
+        //Equivalence Partition - savings account is a savings accout
+        assertEquals(testCustomer.getSavingsAccount(), testAccount);
+        
     }
 
     @Test
     void setCheckingsAccountTest(){
-        //Not sure how to test this yet
+        Customer testCustomer = new Customer(111, "111");
+        CheckingAccount testAccount = new CheckingAccount(550);
+        //Equivalence Partition - checking account is null
+        assertEquals(testCustomer.getCheckingAccount(), null);
+        testCustomer.setCheckingAccount(testAccount);
+        //Equivalence Partition - checking account is a checking account
+        assertEquals(testCustomer.getCheckingAccount(), testAccount);
+
+
     }
 
     @Test
     void getBalanceTest(){
-        //
+        Customer testCustomer = new Customer(111, "111");
+        CheckingAccount testAccount = new CheckingAccount(550);
+        SavingsAccount testAccount2 = new SavingsAccount(500, 500, 0);
+        //Equivalence Partition - balance is zero (may have to change to assertThrow IllegalArgumentException)
+        assertEquals(testCustomer.getBalance(), 0);
+        testCustomer.setCheckingAccount(testAccount);
+        testCustomer.setSavingsAccount(testAccount2);
+        //Equivalence Partition - balance is not zero
+        assertEquals(testCustomer.getBalance(), 1050);
     }
 
-    
+    @Test
+    void getSavingsAccountBalanceTest(){
+        Customer testCustomer = new Customer(111, "111");
+        SavingsAccount testAccount = new SavingsAccount(500, 500, 0);
+        //Equivalence Partition - balance is zero
+        assertEquals(testCustomer.getSavingsAccountBalance(), 0);
+        testCustomer.setSavingsAccount(testAccount);
+        //Equivalence Partition - balance is not zero
+        assertEquals(testCustomer.getSavingsAccountBalance(), 500);
+
+    }
+
+    @Test
+    void getCheckingAccoutnBalanceTest(){
+        Customer testCustomer = new Customer(111, "111");
+        CheckingAccount testAccount = new CheckingAccount(550);
+        //Equivalence Partition - account not set
+        assertEquals(testCustomer.getCheckingAccountBalance(), 0);
+        testCustomer.setCheckingAccount(testAccount);
+        //Equivalence Partition - balance is not zero
+        assertEquals(testCustomer.getCheckingAccountBalance(), 550);
+
+    }
+
+    @Test
+    void withdrawSavingsAccountTest(){
+        Customer testCustomer = new Customer(111, "111");
+        SavingsAccount testAccount = new SavingsAccount(500, 500, 5);
+        
+    }
+
 }

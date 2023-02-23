@@ -29,7 +29,7 @@ public class Customer {
      * @param checkingAccountIn
      * @post sets instance varaiable checkingAccount equals to a created checkingAccount associated with the customer
      */
-    public void setCheckingsAccount(CheckingAccount checkingAccountIn){
+    public void setCheckingAccount(CheckingAccount checkingAccountIn){
     }
 
     /**
@@ -58,7 +58,7 @@ public class Customer {
             total = total + getCheckingAccountBalance();
         }catch(IllegalArgumentException e){}
         try{
-            total = total + getSaveAccountBalance();
+            total = total + getSavingsAccountBalance();
         }catch(IllegalArgumentException e){}
         return total;
     }
@@ -68,7 +68,7 @@ public class Customer {
      * @post returns balance in saving account
      * @return balance of savings account associated with customer
      */
-    private double getSaveAccountBalance() {
+    private double getSavingsAccountBalance() {
         return 0;
     }
 
