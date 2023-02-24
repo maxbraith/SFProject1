@@ -1,7 +1,6 @@
 package edu.ithaca.barr.bank;
 
-import edu.ithaca.barr.bank.Account.BankAccount;
-import edu.ithaca.barr.bank.Account.InsufficientFundsException;
+import edu.ithaca.barr.bank.account.AbstractAccount;
 
 public interface Software { 
 
@@ -14,13 +13,13 @@ public interface Software {
      * @param password - password associated with the account
      * @return TRUE if credentials are valid. FALSE if not
     */
-    boolean confirmCredentials(BankAccount account, String email, String password);
+    boolean confirmCredentials(AbstractAccount account, String email, String password);
 
     /** 
      * @post checks balance in account
      * @return balance
      */
-    double checkBalance(BankAccount account);
+    double checkBalance(AbstractAccount account);
 
     /**
      * @post withdraws a given amount from account balance
@@ -30,7 +29,7 @@ public interface Software {
      * @throws InvalidArgumentException if amount is not valid
      * @throws AccountFrozen exception if account is frozen
      */
-    void withdraw(BankAccount account, double amount) throws InsufficientFundsException;
+    void withdraw(AbstractAccount account, double amount) throws edu.ithaca.barr.bank.account.InsufficientFundsException;
     
     /**
      * @post deposits a given amount to account balance
@@ -38,7 +37,7 @@ public interface Software {
      * @throws InvalidArgumentException if amount is not valid
      * @throws AccountFrozen exception if account is frozen
      */
-    void deposit(BankAccount account, double amount);
+    void deposit(AbstractAccount account, double amount);
 
     /**
      * @post transfers a given amount from account to given account
@@ -50,11 +49,11 @@ public interface Software {
      * @throws InvalidArgumentException if amount is not valid
      * @throws InsufficientBalance if amount>balance for either account
      */
-    public void transfer(double amount, BankAccount transferAccount1, BankAccount transferAccount2) throws InsufficientFundsException;
+    public void transfer(double amount, AbstractAccount transferAccount1, AbstractAccount transferAccount2) throws InsufficientFundsException;
 
     /**
      * @post collects transaction history of an account
      * @return List of previous transactions
      */
-    String checkHistory(BankAccount account);
+    String checkHistory(AbstractAccount account);
 }
