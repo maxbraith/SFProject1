@@ -6,11 +6,7 @@ public class BankAdminSoftware {
     private AbstractAccount[] allAccounts;
     private AbstractAccount[] flaggedAccounts;
     private AbstractAccount[] frozenAccounts;
-
-    public char[] sumAllAccounts(Object accounts) {
-        return null;
-    }
-
+    
     /**
      * @post returns total money across all accounts
      * @return - double of total money
