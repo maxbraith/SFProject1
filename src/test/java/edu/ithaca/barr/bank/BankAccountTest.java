@@ -311,6 +311,7 @@ class BankAccountTest {
         assertEquals(220, bankAccount.getBalance());
     }
 
+
     private ATM atm;
     private BankAccount account;
 
