@@ -1,10 +1,8 @@
-package edu.ithaca.barr.bank.atm;
+package edu.ithaca.barr.bank.ATM;
 
 import edu.ithaca.barr.bank.Software;
-import edu.ithaca.barr.bank.account.BankAccount;
-import edu.ithaca.barr.bank.account.InsufficientFundsException;
-
-import java.util.Queue;
+import edu.ithaca.barr.bank.Account.BankAccount;
+import edu.ithaca.barr.bank.Account.InsufficientFundsException;
 
 //Class name ATM, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
@@ -85,7 +83,7 @@ public class ATM implements Software{
      * @return List of previous transactions
      */
     public String checkHistory(BankAccount account){
-        //return account.historyToString();
+        return account.historyToString();
     }
 
 }
