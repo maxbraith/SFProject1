@@ -55,29 +55,12 @@ public class Customer {
     public double getBalance(){
         double total = 0;
         try{
-            total = total + getCheckingAccountBalance();
+            total = total + checkingAccount.getBalance();
         }catch(IllegalArgumentException e){}
         try{
-            total = total + getSavingsAccountBalance();
+            total = total + savingsAccount.getBalance();
         }catch(IllegalArgumentException e){}
         return total;
-    }
-
-
-    /**
-     * @post returns balance in saving account
-     * @return balance of savings account associated with customer
-     */
-    private double getSavingsAccountBalance() {
-        return 0;
-    }
-
-    /**
-     * @post returns balance in savings account
-     * @return balance of savings account associated with customer
-     */
-    private double getCheckingAccountBalance() {
-        return 0;
     }
 
     /**
@@ -90,6 +73,7 @@ public class Customer {
     /**
      * @post withdraws given amount from checkings account
      * @param amount - amount to withdraw
+     * @throws InsufficientFundsException if 
      */
     public void withdrawSavingsAccount(double amount) {
     }

@@ -53,35 +53,4 @@ public class CustomerTest {
         assertEquals(testCustomer.getBalance(), 1050);
     }
 
-    @Test
-    void getSavingsAccountBalanceTest(){
-        Customer testCustomer = new Customer(111, "111");
-        SavingsAccount testAccount = new SavingsAccount(500, 500, 0);
-        //Equivalence Partition - balance is zero
-        assertEquals(testCustomer.getSavingsAccountBalance(), 0);
-        testCustomer.setSavingsAccount(testAccount);
-        //Equivalence Partition - balance is not zero
-        assertEquals(testCustomer.getSavingsAccountBalance(), 500);
-
-    }
-
-    @Test
-    void getCheckingAccoutnBalanceTest(){
-        Customer testCustomer = new Customer(111, "111");
-        CheckingAccount testAccount = new CheckingAccount(550);
-        //Equivalence Partition - account not set
-        assertEquals(testCustomer.getCheckingAccountBalance(), 0);
-        testCustomer.setCheckingAccount(testAccount);
-        //Equivalence Partition - balance is not zero
-        assertEquals(testCustomer.getCheckingAccountBalance(), 550);
-
-    }
-
-    @Test
-    void withdrawSavingsAccountTest(){
-        Customer testCustomer = new Customer(111, "111");
-        SavingsAccount testAccount = new SavingsAccount(500, 500, 5);
-        
-    }
-
 }
