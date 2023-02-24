@@ -3,10 +3,10 @@ package edu.ithaca.barr.bank.bankadminsystem;
 import edu.ithaca.barr.bank.account.AbstractAccount;
 
 public class BankAdminSoftware {
-    private AbstractAccount[] allAccounts;
-    private AbstractAccount[] flaggedAccounts;
-    private AbstractAccount[] frozenAccounts;
-    
+    public AbstractAccount[] allAccounts;
+    public AbstractAccount[] flaggedAccounts;
+    public AbstractAccount[] frozenAccounts;
+
     /**
      * @post returns total money across all accounts
      * @return - double of total money

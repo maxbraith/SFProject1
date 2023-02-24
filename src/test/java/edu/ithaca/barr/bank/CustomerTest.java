@@ -41,16 +41,28 @@ public class CustomerTest {
     }
 
     @Test
-    void getBalanceTest(){
+    void getBalanceTest() throws InsufficientFundsException{
         Customer testCustomer = new Customer(111, "111");
         CheckingAccount testAccount = new CheckingAccount(550);
         SavingsAccount testAccount2 = new SavingsAccount(500, 500, 0);
-        //Equivalence Partition - balance is zero (may have to change to assertThrow IllegalArgumentException)
-        assertEquals(testCustomer.getBalance(), 0);
+        //Equivalence Partition - accounts are null
+        assertThrows(NullPointerException.class, ()-> testCustomer.getBalance());
+        
         testCustomer.setCheckingAccount(testAccount);
+        //Equivalence Partition - one account is null
+        assertThrows(NullPointerException.class, ()-> testCustomer.getBalance());
+        
         testCustomer.setSavingsAccount(testAccount2);
         //Equivalence Partition - balance is not zero
         assertEquals(testCustomer.getBalance(), 1050);
+
+        testAccount.withdraw(550);
+        testAccount2.withdraw(500);
+        //Equivalence Partition - balance is zero
+        assertEquals(0, testCustomer.getBalance());
+        
+
+
     }
 
 }
