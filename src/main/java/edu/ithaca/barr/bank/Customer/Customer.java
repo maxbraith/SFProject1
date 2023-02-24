@@ -8,8 +8,8 @@ import edu.ithaca.barr.bank.account.SavingsAccount;
 public class Customer {
     private String password;
     private int customerId;
-    private AbstractAccount savingsAccount;
-    private AbstractAccount checkingAccount;
+    private SavingsAccount savingsAccount;
+    private CheckingAccount checkingAccount;
 
     public Customer(int customerId, String password){
         this.customerId = customerId;
@@ -23,6 +23,7 @@ public class Customer {
      * @post sets instance varaiable savingsAccount equal to a created savingsAccount
      */
     public void setSavingsAccount(SavingsAccount savingsAccountIn){
+        savingsAccount = savingsAccountIn;
     }
 
     /**
@@ -30,6 +31,7 @@ public class Customer {
      * @post sets instance varaiable checkingAccount equals to a created checkingAccount associated with the customer
      */
     public void setCheckingAccount(CheckingAccount checkingAccountIn){
+        checkingAccount = checkingAccountIn;
     }
 
     /**
@@ -37,7 +39,7 @@ public class Customer {
      * @return SavingsAccount object
      */
     public SavingsAccount getSavingsAccount(){
-        return null;
+        return savingsAccount;
     }
 
     /**
@@ -45,7 +47,7 @@ public class Customer {
      * @return checking account object
      */
     public CheckingAccount getCheckingAccount(){
-        return null;
+        return checkingAccount;
     }
     
     /**
@@ -66,16 +68,20 @@ public class Customer {
     /**
      * @post withdraws given amount from checkings account
      * @param amount - amount to withdraw
+     * @throws edu.ithaca.barr.bank.account.InsufficientFundsException
      */
-    public void withdrawCheckingAccount(double amount) {
+    public void withdrawCheckingAccount(double amount) throws edu.ithaca.barr.bank.account.InsufficientFundsException {
+        checkingAccount.withdraw(amount);
     }
 
     /**
      * @post withdraws given amount from checkings account
      * @param amount - amount to withdraw
-     * @throws InsufficientFundsException if 
+     * @throws edu.ithaca.barr.bank.account.InsufficientFundsException
+     * @throws InsufficientFundsException 
      */
-    public void withdrawSavingsAccount(double amount) {
+    public void withdrawSavingsAccount(double amount) throws edu.ithaca.barr.bank.account.InsufficientFundsException {
+        savingsAccount.withdraw(amount);
     }
 
     /**
@@ -83,6 +89,7 @@ public class Customer {
      * @param amount - amount to deposit
      */
     public void depositCheckingAccount(double amount) {
+        checkingAccount.deposit(amount);
     }
 
     /**
@@ -90,5 +97,6 @@ public class Customer {
      * @param amount - amount to deposit
      */
     public void depositSavingsAccount(double amount) {
+        savingsAccount.deposit(amount);
     }
 }
