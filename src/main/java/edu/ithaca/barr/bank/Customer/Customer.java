@@ -8,8 +8,8 @@ import edu.ithaca.barr.bank.account.SavingsAccount;
 public class Customer {
     private String password;
     private int customerId;
-    private AbstractAccount savingsAccount;
-    private AbstractAccount checkingAccount;
+    private SavingsAccount savingsAccount;
+    private CheckingAccount checkingAccount;
 
     public Customer(int customerId, String password){
         this.customerId = customerId;
@@ -23,13 +23,31 @@ public class Customer {
      * @post sets instance varaiable savingsAccount equal to a created savingsAccount
      */
     public void setSavingsAccount(SavingsAccount savingsAccountIn){
+        savingsAccount = savingsAccountIn;
     }
 
     /**
      * @param checkingAccountIn
      * @post sets instance varaiable checkingAccount equals to a created checkingAccount associated with the customer
      */
-    public void setCheckingsAccount(CheckingAccount checkingAccountIn){
+    public void setCheckingAccount(CheckingAccount checkingAccountIn){
+        checkingAccount = checkingAccountIn;
+    }
+
+    /**
+     * @post returns the savings account associated with the customer
+     * @return SavingsAccount object
+     */
+    public SavingsAccount getSavingsAccount(){
+        return savingsAccount;
+    }
+
+    /**
+     * @post returns the checking account associated with the customer
+     * @return checking account object
+     */
+    public CheckingAccount getCheckingAccount(){
+        return checkingAccount;
     }
     
     /**
@@ -39,43 +57,31 @@ public class Customer {
     public double getBalance(){
         double total = 0;
         try{
-            total = total + getCheckingAccountBalance();
+            total = total + checkingAccount.getBalance();
         }catch(IllegalArgumentException e){}
         try{
-            total = total + getSaveAccountBalance();
+            total = total + savingsAccount.getBalance();
         }catch(IllegalArgumentException e){}
         return total;
     }
 
-
     /**
-     * @post returns balance in saving account
-     * @return balance of savings account associated with customer
+     * @post withdraws given amount from checkings account
+     * @param amount - amount to withdraw
+     * @throws edu.ithaca.barr.bank.account.InsufficientFundsException
      */
-    private double getSaveAccountBalance() {
-        return 0;
-    }
-
-    /**
-     * @post returns balance in savings account
-     * @return balance of savings account associated with customer
-     */
-    private double getCheckingAccountBalance() {
-        return 0;
+    public void withdrawCheckingAccount(double amount) throws edu.ithaca.barr.bank.account.InsufficientFundsException {
+        checkingAccount.withdraw(amount);
     }
 
     /**
      * @post withdraws given amount from checkings account
      * @param amount - amount to withdraw
+     * @throws edu.ithaca.barr.bank.account.InsufficientFundsException
+     * @throws InsufficientFundsException 
      */
-    public void withdrawCheckingAccount(double amount) {
-    }
-
-    /**
-     * @post withdraws given amount from checkings account
-     * @param amount - amount to withdraw
-     */
-    public void withdrawSavingsAccount(double amount) {
+    public void withdrawSavingsAccount(double amount) throws edu.ithaca.barr.bank.account.InsufficientFundsException {
+        savingsAccount.withdraw(amount);
     }
 
     /**
@@ -83,6 +89,7 @@ public class Customer {
      * @param amount - amount to deposit
      */
     public void depositCheckingAccount(double amount) {
+        checkingAccount.deposit(amount);
     }
 
     /**
@@ -90,5 +97,6 @@ public class Customer {
      * @param amount - amount to deposit
      */
     public void depositSavingsAccount(double amount) {
+        savingsAccount.deposit(amount);
     }
 }
