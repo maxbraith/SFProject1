@@ -6,6 +6,7 @@ public abstract class AbstractAccount {
     String email;
     double balance;
     List<String> history;
+    boolean isFrozen;
 
     /**
     * @post @return balance
@@ -81,6 +82,13 @@ public abstract class AbstractAccount {
         int decimalPlaces = numString.length() - decimalIndex - 1; // Subtract total length by the index of ".".
                                                                    // Subtract by an extra 1 to account for index 0
         return (decimalPlaces <= 2); // Check to see if decimal places is less than 2
+    }
+
+    public void freeze(){
+        this.isFrozen = true;
+    }
+    public void unfreeze(){
+        this.isFrozen = false;
     }
 }
 

@@ -3,10 +3,8 @@ package edu.ithaca.barr.bank.account;
 import java.util.ArrayList;
 
 public class CheckingAccount extends AbstractAccount {
-    private boolean isFlagged;
 
     public CheckingAccount(double startingBalance) {
-        isFlagged = false;
         if (isNumberValid(startingBalance)) {
             this.balance = startingBalance;
         } else {
