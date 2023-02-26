@@ -12,9 +12,6 @@ https://app.diagrams.net/#G11CglsF2gMye5iWeJb5pY_P9OF1q8_eCh
 Link to UML Class Diagram (all of us):
 https://app.diagrams.net/#G1Us6_9TbWRq21zn45_2qtumqjdv-mvvwn
 
-Requirements Document:
-???
-
 SRS Documents:
 https://docs.google.com/document/d/1LqwDtR4_KNFIWwox1tVi8g-981jY7VwPxZW1jD1g9oQ/edit?usp=sharing
 
@@ -24,8 +21,6 @@ Matt Weil - https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blan
 
 User Test Script:
 ????
-
-Note: since max has been away at a swim meet, tests and code has not been written for him yet
 
 Three Use Cases that you will implement first:
 1. - atm interactions
