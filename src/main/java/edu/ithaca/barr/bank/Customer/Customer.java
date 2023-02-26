@@ -1,7 +1,7 @@
 package edu.ithaca.barr.bank.customer;
 
-import edu.ithaca.barr.bank.account.AbstractAccount;
 import edu.ithaca.barr.bank.account.CheckingAccount;
+import edu.ithaca.barr.bank.account.InsufficientFundsException;
 import edu.ithaca.barr.bank.account.SavingsAccount;
 
 //Max Braithwaite
@@ -99,5 +99,45 @@ public class Customer {
      */
     public void depositSavingsAccount(double amount) {
         savingsAccount.deposit(amount);
+    }
+
+    /** 
+    * @return customer ID number
+    */
+    public int getid(){
+        return customerId;
+    }
+
+    /** 
+    * @return customer password 
+    */
+    public String getPassword(){
+        return password;
+    }
+
+    /**
+     * @param amount is amount to transfer
+     * @param customerID is the customer to transfer to
+     * @throws InsufficientFundsException
+     */
+    public void transferSavingsAccount(double amount, Customer customer) throws InsufficientFundsException{
+        if (savingsAccount != null){
+            savingsAccount.transfer(amount, customer.getSavingsAccount());
+        }else{
+            throw new IllegalArgumentException("This account does not exist");
+        }
+    }
+    
+    /**
+     * @param amount is amount to transfer
+     * @param customerID is the customer to transfer to
+     * @throws InsufficientFundsException
+     */
+    public void transferCheckingAccount(double amount, Customer customer) throws InsufficientFundsException{
+        if (checkingAccount != null){
+            checkingAccount.transfer(amount, customer.getCheckingAccount());
+        }else{
+            throw new IllegalArgumentException("This account does not exist");
+        }
     }
 }
