@@ -34,13 +34,17 @@ public class BankAdminSoftware {
     /**
      * @post marks an account as frozen
      */
-    public void freezeAccount(AbstractAccount account2Freeze){
+    public void freezeAccount(AbstractAccount account){
+        account.freeze();
+        frozenAccounts.add(account);
     }
 
     /**
      * @post unfreezes an account
      */
-    public void unfreezeAccount(){
+    public void unfreezeAccount(AbstractAccount account){
+        account.unfreeze();
+        frozenAccounts.remove(account);
     }
     
 }
