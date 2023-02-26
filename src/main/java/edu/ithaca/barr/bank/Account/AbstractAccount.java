@@ -2,9 +2,10 @@ package edu.ithaca.barr.bank.account;
 
 import java.util.List;
 
+//Matthew Weil
 public abstract class AbstractAccount {
     String email;
-    double balance;
+    public double balance;
     List<String> history;
     boolean isFrozen;
 

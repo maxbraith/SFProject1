@@ -1,8 +1,8 @@
 package edu.ithaca.barr.bank;
 import org.junit.jupiter.api.Test;
 
-import edu.ithaca.barr.bank.BankAdminSystem.BankAdminSoftware;
-import edu.ithaca.barr.bank.Teller.BankTeller;
+import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
+import edu.ithaca.barr.bank.teller.BankTeller;
 import edu.ithaca.barr.bank.account.BankAccount;
 import edu.ithaca.barr.bank.account.CheckingAccount;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
@@ -192,16 +192,16 @@ class BankAccountTest {
 
     //Bank System Tests --written but need to implement
     @Test
-    void checkMoneyTotalTest(){
+    void checkMoneyTotalTest() throws InsufficientFundsException{
         BankAdminSoftware bank = new BankAdminSoftware();
         BankTeller teller = new BankTeller();
         teller.createAccount("a@c.com", "abcd", 0, bank);
         teller.createAccount("a@a.com", "abcd", 0, bank);
         teller.createAccount("a@b.com", "abcd", 0, bank);
         assertEquals(0, bank.checkMoneyTotal());
-        teller.deposit(bank.allAccounts[0], 1);
-        teller.deposit(bank.allAccounts[1], 2);
-        teller.deposit(bank.allAccounts[2], 3);
+        teller.deposit(bank.allAccounts.get(0), 1);
+        teller.deposit(bank.allAccounts.get(1), 2);
+        teller.deposit(bank.allAccounts.get(2), 3);
         assertEquals(6, bank.checkMoneyTotal());
         teller.createAccount("a@d.com", "abcd", 4, bank);
         assertEquals(10, bank.checkMoneyTotal());
@@ -209,25 +209,25 @@ class BankAccountTest {
         assertEquals(15, bank.checkMoneyTotal());
         teller.createAccount("a@f.com", "abcd", 6, bank);
         assertEquals(21, bank.checkMoneyTotal());
-        teller.withdraw(bank.allAccounts[4], 3);
+        teller.withdraw(bank.allAccounts.get(4), 3); 
         assertEquals(18, bank.checkMoneyTotal());
-        teller.withdraw(bank.allAccounts[3], 1);
+        teller.withdraw(bank.allAccounts.get(3), 1); 
         assertEquals(17, bank.checkMoneyTotal());
-        teller.withdraw(bank.allAccounts[5], 6);
+        teller.withdraw(bank.allAccounts.get(5), 6);
         assertEquals(11, bank.checkMoneyTotal());
-        teller.transfer(2, bank.allAccounts[4], bank.allAccounts[0]);
-        teller.transfer(3, bank.allAccounts[2], bank.allAccounts[0]);
+        teller.transfer(2, bank.allAccounts.get(4), bank.allAccounts.get(0));
+        teller.transfer(3, bank.allAccounts.get(2), bank.allAccounts.get(0));
         assertEquals(11, bank.checkMoneyTotal());
-        bank.freezeAccount(bank.allAccounts[5]);
-        bank.freezeAccount(bank.allAccounts[4]);
-        bank.freezeAccount(bank.allAccounts[3]);
+        bank.freezeAccount(bank.allAccounts.get(5));
+        bank.freezeAccount(bank.allAccounts.get(4));
+        bank.freezeAccount(bank.allAccounts.get(3));
         assertEquals(11, bank.checkMoneyTotal());
-        bank.unfreezeAccount(bank.allAccounts[5]);
-        bank.unfreezeAccount(bank.allAccounts[4]);
-        bank.unfreezeAccount(bank.allAccounts[3]);
+        bank.unfreezeAccount(bank.allAccounts.get(5));
+        bank.unfreezeAccount(bank.allAccounts.get(4));
+        bank.unfreezeAccount(bank.allAccounts.get(3));
         assertEquals(11, bank.checkMoneyTotal());
-        teller.closeAccount(bank.allAccounts[5], bank);
-        teller.closeAccount(bank.allAccounts[2], bank);
+        teller.closeAccount(bank.allAccounts.get(5), bank);
+        teller.closeAccount(bank.allAccounts.get(2), bank);
         assertEquals(11, bank.checkMoneyTotal());
         }
 
@@ -334,7 +334,6 @@ class BankAccountTest {
         bankAccount.addInterest();
         assertEquals(220, bankAccount.getBalance());
     }
-
 
     private ATM atm;
     private BankAccount account;

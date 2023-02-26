@@ -1,9 +1,9 @@
-package edu.ithaca.barr.bank.ATM;
+package edu.ithaca.barr.bank.atm;
 
 import edu.ithaca.barr.bank.Software;
-import edu.ithaca.barr.bank.Account.BankAccount;
-import edu.ithaca.barr.bank.Account.InsufficientFundsException;
-import edu.ithaca.barr.bank.Account.AbstractAccount;
+import edu.ithaca.barr.bank.account.BankAccount;
+import edu.ithaca.barr.bank.account.InsufficientFundsException;
+import edu.ithaca.barr.bank.account.AbstractAccount;
 
 //Class name ATM, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
@@ -16,7 +16,7 @@ public class ATM implements Software{
      * @return TRUE if credentials are valid. FALSE if not
     */
     public boolean confirmCredentials(AbstractAccount account, String email, String password){
-        if ((account.getEmail()==email)&&(account.getPassword()==password))
+        if ((account.getEmail()==email)&&(((BankAccount) account).getPassword()==password))
         return true;
         else{return false;}
     }
@@ -32,7 +32,7 @@ public class ATM implements Software{
     /**
      * @post withdraws a given amount from account balance
      * @param amount - amount to withdraw from balance
-     * @throws InsufficientBalance if amount>balance
+     * @throws InsufficientFundsException if amount>balance
      * @throws InvalidArgumentException if amount is not valid
      * @throws AccountFrozen exception if account is frozen
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
@@ -51,7 +51,8 @@ public class ATM implements Software{
             throw new InsufficientFundsException("Not enough money");
         }
     }
-    
+
+
     /**
      * @post increases the balance by amount if amount is non-negative and has two decimal points or less
      * @param amount - dollar/cent value to interact with your bank account - must not be more than two decimal places and has to be positive
@@ -64,6 +65,7 @@ public class ATM implements Software{
         } 
         account.balance += amount;
     }
+
 
     /**
      * @post transfers a given amount from account to given account
@@ -78,7 +80,7 @@ public class ATM implements Software{
         transferAccount1.withdraw(amount); //withdraws from current bank
         transferAccount2.deposit(amount); //deposits in passed bank
     }
-
+    
     /**
      * @post collects transaction history of an account
      * @return List of previous transactions
@@ -86,5 +88,4 @@ public class ATM implements Software{
     public String checkHistory(AbstractAccount account){
         return account.historyToString();
     }
-
 }

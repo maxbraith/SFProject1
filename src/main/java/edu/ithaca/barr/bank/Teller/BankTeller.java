@@ -1,17 +1,13 @@
-package edu.ithaca.barr.bank.Teller;
-
-import edu.ithaca.barr.bank.Customer.Customer;
-
-import java.util.Queue;
+package edu.ithaca.barr.bank.teller;
 
 import edu.ithaca.barr.bank.Software;
-import edu.ithaca.barr.bank.Account.AbstractAccount;
-import edu.ithaca.barr.bank.Account.BankAccount;
-import edu.ithaca.barr.bank.BankAdminSystem.BankAdminSoftware;
-import edu.ithaca.barr.bank.Account.InsufficientFundsException;
+import edu.ithaca.barr.bank.account.AbstractAccount;
+import edu.ithaca.barr.bank.account.BankAccount;
+import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
+import edu.ithaca.barr.bank.account.InsufficientFundsException;
 //Class name Bank Teller, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
-//should password have multiple requirements too?
+
 public class BankTeller implements Software{ 
     
     /**
@@ -21,7 +17,7 @@ public class BankTeller implements Software{
      * @return TRUE if credentials are valid. FALSE if not
     */
     public boolean confirmCredentials(AbstractAccount account, String email, String password){
-        if ((account.getEmail()==email)&&(account.getPassword()==password))
+        if ((account.getEmail()==email)&&(((BankAccount) account).getPassword()==password))
         return true;
         else{return false;}
     }
@@ -101,7 +97,7 @@ public class BankTeller implements Software{
      */
     public void createAccount(String email, String password, double startingBalance, BankAdminSoftware adminSoftware){
         for (int i=0; i<adminSoftware.allAccounts.size(); i++){
-            if (adminSoftware.allAccounts[i].getEmail()==email){
+            if (adminSoftware.allAccounts.get(i).getEmail().equals(email)) {
                 throw new IllegalArgumentException("Email already exists in system");
             }
         }

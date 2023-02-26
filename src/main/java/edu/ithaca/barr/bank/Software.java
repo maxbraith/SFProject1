@@ -1,6 +1,7 @@
 package edu.ithaca.barr.bank;
 
-import edu.ithaca.barr.bank.Account.AbstractAccount;
+import edu.ithaca.barr.bank.account.AbstractAccount;
+import edu.ithaca.barr.bank.account.InsufficientFundsException;
 
 public interface Software { 
 
@@ -29,7 +30,7 @@ public interface Software {
      * @throws InvalidArgumentException if amount is not valid
      * @throws AccountFrozen exception if account is frozen
      */
-    void withdraw(AbstractAccount account, double amount) throws edu.ithaca.barr.bank.Account.InsufficientFundsException;
+    void withdraw(AbstractAccount account, double amount) throws InsufficientFundsException;
     
     /**
      * @post deposits a given amount to account balance

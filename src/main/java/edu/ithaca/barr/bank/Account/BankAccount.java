@@ -1,6 +1,7 @@
 package edu.ithaca.barr.bank.account;
 
-public class BankAccount {
+//Matthew Weil
+public class BankAccount extends AbstractAccount {
 
     private String email;
     private String password;
@@ -166,5 +167,11 @@ public class BankAccount {
             this.withdraw(amount);
             transferBankAccount.deposit(amount);
         }
+    }
+
+    @Override
+    public void transfer(double amount, AbstractAccount transferee) throws InsufficientFundsException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'transfer'");
     }
 }

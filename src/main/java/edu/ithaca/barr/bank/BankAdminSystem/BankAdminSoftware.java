@@ -8,8 +8,7 @@ public class BankAdminSoftware {
     public ArrayList<AbstractAccount> allAccounts;
     public ArrayList<AbstractAccount> flaggedAccounts;
     public ArrayList<AbstractAccount> frozenAccounts;
-
-
+    public  ArrayList<AbstractAccount> suspiciousAccounts;
 
     /**
      * @post returns total money across all accounts
