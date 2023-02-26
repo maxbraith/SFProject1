@@ -11,6 +11,8 @@ import edu.ithaca.barr.bank.atm.ATM;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 import org.junit.jupiter.api.BeforeEach;
 
 
@@ -233,10 +235,29 @@ class BankAccountTest {
 
     @Test
     void accountsTest(){
-        //create lots of accounts, each iteration checking that it was added
-        //freeze and unfreeze some accounts, ensure that # of accounts does not change
-        //report some suspicious accounts, ensure that # of accounts does not change
-        //close out each account, making sure each was actually closed
+        BankAdminSoftware bank = new BankAdminSoftware();
+        BankTeller teller = new BankTeller();
+        assertEquals(0,bank.allaccounts.size());
+        teller.createAccount("a@c.com", "abcd", 0, bank);
+        assertEquals(1,bank.allaccounts.size());
+        teller.createAccount("a@a.com", "abcd", 0, bank);
+        assertEquals(2,bank.allaccounts.size());
+        teller.createAccount("a@b.com", "abcd", 0, bank);
+        assertEquals(3,bank.allaccounts.size());
+        bank.freezeAccount(bank.allAccounts.get(0));
+        bank.freezeAccount(bank.allAccounts.get(1));
+        bank.freezeAccount(bank.allAccounts.get(2));
+        assertEquals(3,bank.allaccounts.size());
+        bank.unfreezeAccount(bank.allAccounts.get(0));
+        bank.unfreezeAccount(bank.allAccounts.get(1));
+        bank.unfreezeAccount(bank.allAccounts.get(2));
+        assertEquals(3,bank.allaccounts.size());
+        teller.closeAccount(bank.allAccounts.get(2), bank);
+        assertEquals(2,bank.allaccounts.size());
+        teller.closeAccount(bank.allAccounts.get(1), bank);
+        assertEquals(1,bank.allaccounts.size());
+        teller.closeAccount(bank.allAccounts.get(0), bank);
+        assertEquals(0,bank.allaccounts.size());
     }
 
     @Test
@@ -249,11 +270,44 @@ class BankAccountTest {
 
     @Test
     void freezeUnfreezeAccountTest(){
-        //create a bunch of accounts, freezing and unfreezing as you go and ensuring that they stayed frozen/unfrozen
-        //ensure if accounts are frozen, they cannot withdraw, deposit, or transfer
+        BankAdminSoftware bank = new BankAdminSoftware();
+        BankTeller teller = new BankTeller();
+        teller.createAccount("a@c.com", "abcd", 0, bank);
+        teller.createAccount("a@a.com", "abcd", 0, bank);
+        teller.createAccount("a@b.com", "abcd", 0, bank);
+        assertEquals(false, bank.allAccounts.get(0));
+        assertEquals(false, bank.allAccounts.get(1));
+        assertEquals(false, bank.allAccounts.get(2));
+        assertEquals(0, bank.frozenAccounts.size());
+        bank.freezeAccount(bank.allAccounts.get(0));
+        assertEquals(1, bank.frozenAccounts.size());
+        bank.freezeAccount(bank.allAccounts.get(1));
+        assertEquals(2, bank.frozenAccounts.size());
+        bank.freezeAccount(bank.allAccounts.get(2));
+        assertEquals(true, bank.allAccounts.get(0));
+        assertEquals(true, bank.allAccounts.get(1));
+        assertEquals(true, bank.allAccounts.get(2));
+        assertThrows(AccountFrozenException.class ()-> bank.allAccounts.get(0).withdraw());
+        assertThrows(AccountFrozenException.class ()-> bank.allAccounts.get(1).deposit());
+        assertThrows(AccountFrozenException.class ()-> teller.transfer(bank.allAccounts.get(2),bank.allAccounts.get(1)));
+        assertEquals(3, bank.frozenAccounts.size());
+        assertThrows(AccountNotFoundException.class ()-> bank.freezeAccount(allAccounts.get(5)));
+        bank.unfreezeAccount(bank.allAccounts.get(0));
+        assertEquals(2, bank.frozenAccounts.size());
+        bank.unfreezeAccount(bank.allAccounts.get(1));
+        assertEquals(1, bank.frozenAccounts.size());
+        bank.unfreezeAccount(bank.allAccounts.get(2));
+        assertEquals(0, bank.frozenAccounts.size());
+        assertEquals(false, bank.allAccounts.get(0));
+        assertEquals(false, bank.allAccounts.get(1));
+        assertEquals(false, bank.allAccounts.get(2));
+        bank.freezeAccount(bank.allAccounts.get(0));
+        bank.freezeAccount(bank.allAccounts.get(1));
+        teller.closeAccount(bank.allAccounts.get(0));
+        teller.closeAccount(bank.allAccounts.get(1));
+        teller.closeAccount(bank.allAccounts.get(2));
+        assertEquals(0, bank.frozenAccounts.size());
         //report suspicious accounts and ensure they do not freeze by themselves
-        //close accounts and ensure they arent still listed as frozen/unfrozen
-         //ensure if you pass invalid id in it throws an error
     }
 
     @Test
