@@ -1,32 +1,40 @@
 package edu.ithaca.barr.bank.bankadminsystem;
 
+import java.util.ArrayList;
+
 import edu.ithaca.barr.bank.account.AbstractAccount;
 
 public class BankAdminSoftware {
-    public AbstractAccount[] allAccounts;
-    public AbstractAccount[] flaggedAccounts;
-    public AbstractAccount[] frozenAccounts;
+    public ArrayList<AbstractAccount> allAccounts;
+    public ArrayList<AbstractAccount> flaggedAccounts;
+    public ArrayList<AbstractAccount> frozenAccounts;
+
+
 
     /**
      * @post returns total money across all accounts
      * @return - double of total money
      */
     public double checkMoneyTotal(){
-        return 0;
+        double total=0;
+        for(int i=0; i<allAccounts.size(); i++){
+            total += allAccounts.get(i).getBalance();
+        }
+        return total;
     }
 
     /**
      * @post returns array of all accounts flagged as suspiscious
      * @return - array of suspiscious accounts
      */
-    public AbstractAccount[] reportOfSuspisciousAccounts(){
-        return null;
+    public ArrayList<AbstractAccount> reportOfSuspisciousAccounts(){
+        return flaggedAccounts;
     }
 
     /**
      * @post marks an account as frozen
      */
-    public void freezeAccount(){
+    public void freezeAccount(AbstractAccount account2Freeze){
     }
 
     /**

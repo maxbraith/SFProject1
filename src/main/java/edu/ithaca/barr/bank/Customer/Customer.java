@@ -4,6 +4,7 @@ import edu.ithaca.barr.bank.account.AbstractAccount;
 import edu.ithaca.barr.bank.account.CheckingAccount;
 import edu.ithaca.barr.bank.account.SavingsAccount;
 
+//Max Braithwaite
 
 public class Customer {
     private String password;
