@@ -343,16 +343,16 @@ public class UserInterface {
     private static void adminState(BankAdminSoftware admin){
         boolean done = false;
         while(!done){
-            System.out.println("Options:\n0\tGet Total Balance\n1\tExit");
+            System.out.println("Options:\n0\tGet Total Balance\n1\tReport of Suspicious Accounts\n2\tExit");
             try{
                 int choice = in.nextInt();
-                if (choice < 0 || choice > 1){
+                if (choice < 0 || choice > 2){
                     throw new Exception();
-                }
-                if (choice == 0){
+                }if (choice == 0){
                     System.out.println(admin.checkMoneyTotal());
-                }
-                else{
+                }else if (choice == 1){
+                    System.out.println(admin.reportOfSuspisciousAccounts());
+                }else{
                     done = true;
                 }
             }
@@ -379,8 +379,6 @@ public class UserInterface {
         while(!done){
             done = loginState();
         }
-        
-
         //close scanner
         in.close();
     }
