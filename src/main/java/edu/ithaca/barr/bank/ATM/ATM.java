@@ -1,9 +1,9 @@
 package edu.ithaca.barr.bank.atm;
 
 import edu.ithaca.barr.bank.Software;
-import edu.ithaca.barr.bank.account.BankAccount;
-import edu.ithaca.barr.bank.account.InsufficientFundsException;
-import edu.ithaca.barr.bank.account.AbstractAccount;
+import edu.ithaca.barr.bank.Account.BankAccount;
+import edu.ithaca.barr.bank.Account.InsufficientFundsException;
+import edu.ithaca.barr.bank.Account.AbstractAccount;
 
 //Class name ATM, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
@@ -42,7 +42,7 @@ public class ATM implements Software{
             throw new IllegalArgumentException("Amount cannot be negative or have more than two numbers after the decimal point");
         } 
         if (amount < account.getBalance()){
-            account.balance -= amount;
+            account.withdraw(amount);
         }
         else if (Math.abs(account.getBalance()-amount)<.01){ //if balance and amount are equivalent to 3 significant figures after the decimal point
             account.balance -= amount;
@@ -63,7 +63,7 @@ public class ATM implements Software{
         if (!BankAccount.isAmountValid(amount)){
             throw new IllegalArgumentException("Amount cannot be negative or have more than two numbers after the decimal point");
         } 
-        account.balance += amount;
+        account.deposit(amount);
     }
 
 

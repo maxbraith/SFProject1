@@ -1,10 +1,10 @@
 package edu.ithaca.barr.bank.teller;
 
 import edu.ithaca.barr.bank.Software;
-import edu.ithaca.barr.bank.account.AbstractAccount;
-import edu.ithaca.barr.bank.account.BankAccount;
-import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
-import edu.ithaca.barr.bank.account.InsufficientFundsException;
+import edu.ithaca.barr.bank.Account.AbstractAccount;
+import edu.ithaca.barr.bank.Account.BankAccount;
+import edu.ithaca.barr.bank.BankAdminSystem.BankAdminSoftware;
+import edu.ithaca.barr.bank.Account.InsufficientFundsException;
 //Class name Bank Teller, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
 
