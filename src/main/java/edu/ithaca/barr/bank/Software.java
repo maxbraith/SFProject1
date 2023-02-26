@@ -1,7 +1,6 @@
 package edu.ithaca.barr.bank;
 
-import edu.ithaca.barr.bank.account.AbstractAccount;
-import edu.ithaca.barr.bank.account.InsufficientFundsException;
+import edu.ithaca.barr.bank.Account.AbstractAccount;
 
 public interface Software { 
 

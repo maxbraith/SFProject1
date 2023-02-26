@@ -99,14 +99,14 @@ public class BankTeller implements Software{
      * @param starting balance - amount user puts into the account when they open
      * @throws InvalidArgumentException if email or starting balance is not valid, if email already exists in system
      */
-    private void createAccount(String email, String password, double startingBalance){
-        for (int i=0; i<BankAdminSoftware.allAccounts.size(); i++){
-            if (BankAdminSoftware.allAccounts[i].getEmail()==email){
+    public void createAccount(String email, String password, double startingBalance, BankAdminSoftware adminSoftware){
+        for (int i=0; i<adminSoftware.allAccounts.size(); i++){
+            if (adminSoftware.allAccounts[i].getEmail()==email){
                 throw new IllegalArgumentException("Email already exists in system");
             }
         }
         BankAccount account = new BankAccount(email, password, startingBalance);
-        BankAdminSoftware.allAccounts.add(account);
+        adminSoftware.allAccounts.add(account);
         
     }
 
@@ -115,14 +115,14 @@ public class BankTeller implements Software{
      * @param ID - ID for specific account to remove
      * @throws InvalidArgumentException if account does not exist
      */
-    private void closeAccount(AbstractAccount account){
+    public void closeAccount(AbstractAccount account, BankAdminSoftware adminSoftware){
        if (account.getBalance()>0){
-            BankAdminSoftware.allAccounts.remove(account);
-            if (BankAdminSoftware.suspiciousAccounts.contains(account)){
-                BankAdminSoftware.suspiciousAccounts.remove(account);
+            adminSoftware.allAccounts.remove(account);
+            if (adminSoftware.suspiciousAccounts.contains(account)){
+                adminSoftware.suspiciousAccounts.remove(account);
             }
-            if (BankAdminSoftware.frozenAccounts.contains(account)){
-                BankAdminSoftware.frozenAccounts.remove(account);
+            if (adminSoftware.frozenAccounts.contains(account)){
+                adminSoftware.frozenAccounts.remove(account);
             }
        }
        else{
