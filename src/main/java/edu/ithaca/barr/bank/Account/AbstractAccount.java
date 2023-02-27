@@ -28,7 +28,7 @@ public abstract class AbstractAccount {
     * @post increases the balance by @param amount if amount is non-negative
     */
     public void deposit(double amount) throws IllegalArgumentException{
-        if (isNumberValid(amount)) {
+        if (isNumberValid(amount)&& (!this.isFrozen)) {
             balance += amount;
             balance = Math.round(balance * 100.0) / 100.0;
             appendTransaction(amount, "deposit");
@@ -100,8 +100,5 @@ public abstract class AbstractAccount {
     public boolean getStatus(){
         return isFrozen;
     }
-
-
-    
 }
 
