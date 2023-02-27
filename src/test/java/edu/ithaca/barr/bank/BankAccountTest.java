@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
 import edu.ithaca.barr.bank.customer.Customer;
+import edu.ithaca.barr.bank.account.AbstractAccount;
 import edu.ithaca.barr.bank.account.Bank;
 import edu.ithaca.barr.bank.account.BankAccount;
 import edu.ithaca.barr.bank.account.CheckingAccount;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.nio.file.AccessDeniedException;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 //Tests For Bank System - Written by Giovanni
@@ -458,6 +460,43 @@ class BankAccountTest {
         // Check that the balances of both accounts were updated correctly
         assertEquals(750.0, account.getBalance(), 0.01);
         assertEquals(750.0, otherAccount.getBalance(), 0.01);
+    }
+
+    //System Test -Matt
+    private Customer customer;
+
+    @Test
+    public void testGetBalance() throws InsufficientFundsException {
+        customer = new Customer(1, "password");
+        customer.setSavingsAccount(new SavingsAccount(0.05, 200, 0));
+        customer.setCheckingAccount(new CheckingAccount(0.01));
+        customer.depositSavingsAccount(100);
+        customer.depositCheckingAccount(200);
+        assertEquals(300.06, customer.getBalance(), 0.001);
+    }
+
+    @Test
+    public void testTransferSavingsAccount() throws InsufficientFundsException {
+        customer = new Customer(1, "password");
+        customer.setSavingsAccount(new SavingsAccount(100, 200, 0));
+        customer.setCheckingAccount(new CheckingAccount(0.01));
+        Customer customer2 = new Customer(2, "password");
+        customer2.setSavingsAccount(new SavingsAccount(0.00, 200, 0));
+        customer.transferSavingsAccount(100, customer2);
+        assertEquals(0.0, customer.getSavingsAccount().getBalance(), 0.001);
+        assertEquals(100.0, customer2.getSavingsAccount().getBalance(), 0.001);
+    }
+
+    @Test
+    public void testTransferCheckingAccount() throws InsufficientFundsException {
+        customer = new Customer(1, "password");
+        customer.setSavingsAccount(new SavingsAccount(100, 200, 0));
+        customer.setCheckingAccount(new CheckingAccount(100));
+        Customer customer2 = new Customer(2, "password");
+        customer2.setCheckingAccount(new CheckingAccount(0.01));
+        customer.transferCheckingAccount(100, customer2);
+        assertEquals(0.0, customer.getCheckingAccount().getBalance(), 0.001);
+        assertEquals(100.01, customer2.getCheckingAccount().getBalance(), 0.001);
     }
 }
 
