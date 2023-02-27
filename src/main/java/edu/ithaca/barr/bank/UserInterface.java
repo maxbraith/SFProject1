@@ -370,15 +370,8 @@ public class UserInterface {
         bank.addTeller(initialTeller);
         Customer initialCustomer = new Customer(nextId, "password");
         nextId++;
-        
         bank.addCustomer(initialCustomer);
         bank.createNewAccount(initialTeller, initialCustomer, 0, 0, 0, 0);
-
-        Customer initialCustomer2 = new Customer(nextId, "password");
-        nextId++;
-        bank.addCustomer(initialCustomer2);
-        bank.createNewAccount(initialTeller, initialCustomer2, 0, 0, 0, 0);
-        
 
         //go to state to login
         boolean done = false;
