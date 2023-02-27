@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import edu.ithaca.barr.bank.account.Bank;
 import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
 import edu.ithaca.barr.bank.customer.Customer;
+import edu.ithaca.barr.bank.teller.BankTeller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,8 +16,15 @@ public class BankAdminTest {
         Bank bank = new Bank();
         Customer testCustomer = new Customer(333, "12");
         BankAdminSoftware testAdmin = new BankAdminSoftware(123, "123");
-        assertEquals(0, testAdmin.checkMoneyTotal(bank));
+        BankTeller teller = new BankTeller(123, "123");
         
+        //Equivalence Partition - No accounts in arrayList
+        assertEquals(0, testAdmin.checkMoneyTotal(bank));
+
+        //
+
+        
+
 
         
         

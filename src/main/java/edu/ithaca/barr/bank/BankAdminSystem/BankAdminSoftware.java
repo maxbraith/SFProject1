@@ -43,10 +43,7 @@ public class BankAdminSoftware {
      */
     public void freezeAccount(AbstractAccount account, Bank bank){
         account.freeze();
-        if (frozenAccounts == null) {
-            frozenAccounts = new ArrayList<AbstractAccount>();
-        }
-        frozenAccounts.add(account);
+        bank.frozenAccounts.add(account);
     }
 
     /**
