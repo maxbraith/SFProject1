@@ -9,7 +9,7 @@ import edu.ithaca.barr.bank.customer.Customer;
 
 public class Bank {
 
-    private List<AbstractAccount> accounts;
+    public List<AbstractAccount> accounts;
     private List<BankTeller> tellers;
     private List<BankAdminSoftware> admins;
     private List<Customer> customers;
@@ -19,6 +19,18 @@ public class Bank {
         tellers = new ArrayList<>();
         admins = new ArrayList<>();
         customers = new ArrayList<>();
+    }
+
+        /**
+     * @post returns total money across all accounts
+     * @return - double of total money
+     */
+    public double checkMoneyTotal(){
+        double total=0;
+        for(int i=0; i<accounts.size(); i++){
+            total += accounts.get(i).getBalance();
+        }
+        return total;
     }
 
     /**

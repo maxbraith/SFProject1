@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import edu.ithaca.barr.bank.account.AbstractAccount;
 import edu.ithaca.barr.bank.account.Bank;
-import edu.ithaca.barr.bank.atm.ATM;
 import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
 import edu.ithaca.barr.bank.customer.Customer;
 import edu.ithaca.barr.bank.teller.BankTeller;
@@ -365,14 +364,14 @@ public class UserInterface {
     public static void main(String[] args) {        
 
         //initialize with one teller, one admin, and one customer - can make more customers if needed if making accounts
-        BankAdminSoftware intialAdmin = new BankAdminSoftware(0, "password");
-        bank.addAdmin(intialAdmin);
-        BankTeller intialTeller = new BankTeller(0, "password");
-        bank.addTeller(intialTeller);
-        Customer intialCustomer = new Customer(nextId, "password");
+        BankAdminSoftware initialAdmin = new BankAdminSoftware(0, "password");
+        bank.addAdmin(initialAdmin);
+        BankTeller initialTeller = new BankTeller(0, "password");
+        bank.addTeller(initialTeller);
+        Customer initialCustomer = new Customer(nextId, "password");
         nextId++;
-        bank.addCustomer(intialCustomer);
-        bank.createNewAccount(intialTeller, intialCustomer, 0, 0, 0, 0);
+        bank.addCustomer(initialCustomer);
+        bank.createNewAccount(initialTeller, initialCustomer, 0, 0, 0, 0);
 
         //go to state to login
         boolean done = false;
