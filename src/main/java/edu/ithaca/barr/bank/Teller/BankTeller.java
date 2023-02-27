@@ -36,10 +36,8 @@ public class BankTeller implements Software{
      * @param password - password associated with the account
      * @return TRUE if credentials are valid. FALSE if not
     */
-    public boolean confirmCredentials(AbstractAccount account, String email, String password){
-        if ((account.getEmail()==email)&&(account.getPassword()==password))
-        return true;
-        else{return false;}
+    public boolean confirmCredentials(AbstractAccount account, String email, String password) {
+        return (account.getEmail().equals(email) && account.getPassword().equals(password));
     }
 
     /** 
@@ -108,23 +106,30 @@ public class BankTeller implements Software{
         return account.historyToString();
     }
 
-    /**
-     * @post creates an account for the bank - will be added to accounts in bank system
-     * @param email - email to use for account
-     * @param password - password to use for account
-     * @param starting balance - amount user puts into the account when they open
-     * @throws InvalidArgumentException if email or starting balance is not valid, if email already exists in system
-     */
-    public void createAccount(String email, String password, double startingBalance, Bank bank){
-        for (int i=0; i<bank.accounts.size(); i++){
-            if (bank.accounts.get(i).getEmail()==email){
-                throw new IllegalArgumentException("Email already exists in system");
-            }
+    public AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
+        if(accountType == 0){
+            CheckingAccount account = new CheckingAccount(startBal);
+            existCustomer.setCheckingAccount(account);
+            return account;
         }
-        BankAccount account = new BankAccount(email, password, startingBalance);
-        bank.accounts.add(account);
-        
+        else if(accountType == 1){
+            SavingsAccount account = new SavingsAccount(startBal, withdrawLimit, percentInt);
+            existCustomer.setSavingsAccount(account);
+            return account;
+        }
+        else{
+            existCustomer.setCheckingAccount(new CheckingAccount(startBal));
+            existCustomer.setSavingsAccount(new SavingsAccount(startBal, withdrawLimit, percentInt));
+            return null;
+        }
     }
+
+    public Customer createAccount(int customerId, String password, int accountType, double withdrawLimit, double percentInt, double startBal){
+        Customer customer = new Customer(customerId, password);
+        createAccount(customer, accountType, withdrawLimit, percentInt, startBal);
+        return customer;
+    }
+
 
     /**
      * @post closes an account in bank system, will be removed from accounts, report suspicious accounts, etc

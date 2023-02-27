@@ -1,7 +1,7 @@
 package edu.ithaca.barr.bank;
 import org.junit.jupiter.api.Test;
 
-import edu.ithaca.barr.bank.BankAdminSystem.BankAdminSoftware;
+import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
 import edu.ithaca.barr.bank.account.BankAccount;
 import edu.ithaca.barr.bank.account.CheckingAccount;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
@@ -193,8 +193,8 @@ class BankAccountTest {
     //Bank System Tests --written but need to implement
     @Test
     void checkMoneyTotalTest(){
-        BankAdminSoftware bank = new BankAdminSoftware();
-        BankTeller teller = new BankTeller();
+        BankAdminSoftware bank = new BankAdminSoftware(0, null);
+        BankTeller teller = new BankTeller(0, null);
         teller.createAccount("a@c.com", "abcd", 0, bank);
         teller.createAccount("a@a.com", "abcd", 0, bank);
         teller.createAccount("a@b.com", "abcd", 0, bank);

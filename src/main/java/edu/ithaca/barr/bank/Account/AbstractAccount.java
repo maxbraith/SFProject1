@@ -6,6 +6,7 @@ import java.util.List;
 public abstract class AbstractAccount {
     String email;
     public double balance;
+    String password;
     List<String> history;
     boolean isFrozen;
 
@@ -90,6 +91,10 @@ public abstract class AbstractAccount {
     }
     public void unfreeze(){
         this.isFrozen = false;
+    }
+
+    public Object getPassword() {
+        return password;
     }
 
 
