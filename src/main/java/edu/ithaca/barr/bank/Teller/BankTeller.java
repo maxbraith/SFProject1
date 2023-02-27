@@ -3,13 +3,32 @@ package edu.ithaca.barr.bank.teller;
 import edu.ithaca.barr.bank.Software;
 import edu.ithaca.barr.bank.account.AbstractAccount;
 import edu.ithaca.barr.bank.account.BankAccount;
+import edu.ithaca.barr.bank.account.CheckingAccount;
 import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
+import edu.ithaca.barr.bank.customer.Customer;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
 //Class name Bank Teller, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
 //Written By Giovanni Cioffi 19-Feb-2023
+import edu.ithaca.barr.bank.account.SavingsAccount;
 
 public class BankTeller implements Software{ 
+    private int id;
+    private String password;
+
+    public BankTeller(int id, String password){
+        this.id = id;
+        this.password = password;
+
+    }
+
     
+    public int getId(){
+        return id;
+    }
+
+    public String getPassword(){
+        return password;
+    }
     /**
      * @post confirm user's credentials are valid
      * @param email - email associated with the account
@@ -88,22 +107,28 @@ public class BankTeller implements Software{
         return account.historyToString();
     }
 
-    /**
-     * @post creates an account for the bank - will be added to accounts in bank system
-     * @param email - email to use for account
-     * @param password - password to use for account
-     * @param starting balance - amount user puts into the account when they open
-     * @throws InvalidArgumentException if email or starting balance is not valid, if email already exists in system
-     */
-    public void createAccount(String email, String password, double startingBalance, BankAdminSoftware adminSoftware){
-        for (int i=0; i<adminSoftware.allAccounts.size(); i++){
-            if (adminSoftware.allAccounts.get(i).getEmail().equals(email)) {
-                throw new IllegalArgumentException("Email already exists in system");
-            }
+    public AbstractAccount createAccount(Customer existCustomer, int accountType, double withdrawLimit, double percentInt, double startBal){
+        if(accountType == 0){
+            CheckingAccount account = new CheckingAccount(startBal);
+            existCustomer.setCheckingAccount(account);
+            return account;
         }
-        BankAccount account = new BankAccount(email, password, startingBalance);
-        adminSoftware.allAccounts.add(account);
-        
+        else if(accountType == 1){
+            SavingsAccount account = new SavingsAccount(startBal, withdrawLimit, percentInt);
+            existCustomer.setSavingsAccount(account);
+            return account;
+        }
+        else{
+            existCustomer.setCheckingAccount(new CheckingAccount(startBal));
+            existCustomer.setSavingsAccount(new SavingsAccount(startBal, withdrawLimit, percentInt));
+            return null;
+        }
+    }
+
+    public Customer createAccount(int customerId, String password, int accountType, double withdrawLimit, double percentInt, double startBal){
+        Customer customer = new Customer(customerId, password);
+        createAccount(customer, accountType, withdrawLimit, percentInt, startBal);
+        return customer;
     }
 
     /**

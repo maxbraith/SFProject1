@@ -9,7 +9,13 @@ public class BankAdminSoftware {
     public ArrayList<AbstractAccount> flaggedAccounts;
     public ArrayList<AbstractAccount> frozenAccounts;
     public  ArrayList<AbstractAccount> suspiciousAccounts;
+    private int adminId;
+    private String password;
 
+    public BankAdminSoftware(int adminId, String password){
+        this.adminId = adminId;
+        this.password = password;
+    }
     /**
      * @post returns total money across all accounts
      * @return - double of total money
@@ -44,6 +50,22 @@ public class BankAdminSoftware {
     public void unfreezeAccount(AbstractAccount account){
         account.unfreeze();
         frozenAccounts.remove(account);
+    }
+
+        /**
+     * Get the id of the admin
+     * @return id of admin
+     */
+    public int getId(){
+        return adminId;
+    }
+
+    /**
+     * get password of admin
+     * @return password of admin
+     */
+    public String getPassword(){
+        return password;
     }
     
 }
