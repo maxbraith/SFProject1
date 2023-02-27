@@ -18,6 +18,7 @@ https://docs.google.com/document/d/1LqwDtR4_KNFIWwox1tVi8g-981jY7VwPxZW1jD1g9oQ/
 UML Sequence Documents:
 Giovanni - https://drive.google.com/file/d/1XgCeChpjP8vbpQscl081KtdMRmBvQDHI/view?usp=sharing
 Matt Weil - https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#G19wsyS_N-vG0dG4GBNkn03pqPmH3b-wIp
+Max Braithwaite - https://docs.google.com/document/d/1FxSNurYp7KBOIlfB9QipFUO-qdzDWcx9kUbtPzC6vfc/edit?usp=sharing
 
 User Test Script:
 ????
