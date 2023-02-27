@@ -2,7 +2,7 @@ package edu.ithaca.barr.bank.account;
 
 import java.util.List;
 
-//Matthew Weil
+//Written by Matthew Weil
 public abstract class AbstractAccount {
     String email;
     public double balance;

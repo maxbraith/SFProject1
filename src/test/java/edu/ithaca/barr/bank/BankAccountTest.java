@@ -1,7 +1,6 @@
 package edu.ithaca.barr.bank;
 import org.junit.jupiter.api.Test;
 
-import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
 import edu.ithaca.barr.bank.customer.Customer;
 import edu.ithaca.barr.bank.account.Bank;
 import edu.ithaca.barr.bank.account.BankAccount;
@@ -9,18 +8,12 @@ import edu.ithaca.barr.bank.account.CheckingAccount;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
 import edu.ithaca.barr.bank.account.SavingsAccount;
 import edu.ithaca.barr.bank.atm.ATM;
-import edu.ithaca.barr.bank.teller.BankTeller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import javax.security.auth.login.AccountNotFoundException;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
-//Tests For Bank System - Written by Giovanni
-//Tests for ___ - Written by Matt
-//Tests for ____ - Written by Max
+//All Tests in this file - Written by Matt
 
 class BankAccountTest {
 
@@ -288,6 +281,7 @@ class BankAccountTest {
         account = new BankAccount("johndoe@example.com", "password", 1000.0);
     }
 
+    //Integration Test Continued- Matt 
     @Test
     void testWithdraw() throws InsufficientFundsException {
         // Withdraw some money from the account using the ATM
@@ -296,6 +290,7 @@ class BankAccountTest {
         assertEquals(500.0, account.getBalance(), 0.01);
     }
 
+    //Integration Test Continued- Matt 
     @Test
     void testDeposit() {
         // Deposit some money into the account using the ATM
@@ -303,7 +298,8 @@ class BankAccountTest {
         // Check that the account balance was updated correctly
         assertEquals(1500.0, account.getBalance(), 0.01);
     }
-
+    
+    //Integration Test Continued- Matt 
     @Test
     void testTransfer() throws InsufficientFundsException {
         // Create a second bank account to transfer money to
@@ -327,7 +323,7 @@ class BankAccountTest {
         customer.depositCheckingAccount(200);
         assertEquals(300.06, customer.getBalance(), 0.001);
     }
-
+    //System Test Continued -Matt
     @Test
     public void testTransferSavingsAccount() throws InsufficientFundsException {
         customer = new Customer(1, "password");
@@ -339,7 +335,8 @@ class BankAccountTest {
         assertEquals(0.0, customer.getSavingsAccount().getBalance(), 0.001);
         assertEquals(100.0, customer2.getSavingsAccount().getBalance(), 0.001);
     }
-
+    
+    //System Test Continued -Matt
     @Test
     public void testTransferCheckingAccount() throws InsufficientFundsException {
         customer = new Customer(1, "password");

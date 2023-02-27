@@ -2,8 +2,7 @@ package edu.ithaca.barr.bank.account;
 
 import java.util.ArrayList;
 
-
-//Mathew Weil
+//Written by Matthew Weil
 public class CheckingAccount extends AbstractAccount {
 
     public CheckingAccount(double startingBalance) {

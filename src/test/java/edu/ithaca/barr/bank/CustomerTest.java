@@ -9,6 +9,7 @@ import edu.ithaca.barr.bank.customer.Customer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//All tests written by Max
 public class CustomerTest {
     @Test
     void setSavingsAccountTest(){

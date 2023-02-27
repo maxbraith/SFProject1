@@ -7,6 +7,7 @@ import edu.ithaca.barr.bank.teller.BankTeller;
 import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
 import edu.ithaca.barr.bank.customer.Customer;
 
+//Written by Matthew Weil
 public class Bank {
 
     public List<AbstractAccount> flaggedAccounts;
