@@ -6,7 +6,7 @@ import edu.ithaca.barr.bank.account.InsufficientFundsException;
 import edu.ithaca.barr.bank.account.AbstractAccount;
 
 //Class name ATM, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
-//Written By Giovanni Cioffi 19-Feb-2023
+//Written By Giovanni Cioffi 27-Feb-2023
 
 public class ATM implements Software{
      /**
