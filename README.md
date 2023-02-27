@@ -3,8 +3,7 @@
 ## Project 01 - Bank Software
 
 Names:
-Giovanni Cioffi, Matthew Weil, Max 
-
+Giovanni Cioffi, Matthew Weil, Max Braithwaite
 
 Link to UML Use Case Diagram (all of us):
 https://app.diagrams.net/#G11CglsF2gMye5iWeJb5pY_P9OF1q8_eCh
@@ -16,12 +15,12 @@ SRS Documents:
 https://docs.google.com/document/d/1LqwDtR4_KNFIWwox1tVi8g-981jY7VwPxZW1jD1g9oQ/edit?usp=sharing
 
 UML Sequence Documents:
-Giovanni - https://drive.google.com/file/d/1XgCeChpjP8vbpQscl081KtdMRmBvQDHI/view?usp=sharing
+Giovanni Cioffi - https://drive.google.com/file/d/1XgCeChpjP8vbpQscl081KtdMRmBvQDHI/view?usp=sharing
 Matt Weil - https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#G19wsyS_N-vG0dG4GBNkn03pqPmH3b-wIp
 Max Braithwaite - https://docs.google.com/document/d/1FxSNurYp7KBOIlfB9QipFUO-qdzDWcx9kUbtPzC6vfc/edit?usp=sharing
 
 User Test Script:
-????
+https://docs.google.com/document/d/1sr0zxev-SQyUGWaW2sRo2NDkQD63FSHf9YlJe7jB_Ro/edit?usp=sharing
 
 Three Use Cases that you will implement first:
 1. - atm interactions
@@ -30,16 +29,10 @@ Three Use Cases that you will implement first:
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
-1. - Giovanni will implement atm, teller, software classes and tests for bank system class. his branch has not been merged but has been mostly implemented
-2. - Matt implements all Account classes and user interface
-3. -
-4. -
-5. << add more as needed >>
+1. - Giovanni will implement atm, teller, software classes and tests for bank system class
+2. - Matt implements all Account classes (in Account Folder) including Bank and user interface, as well as helped implement teller. 
+3. - Max implmented all of Custmer and helped with teller, and bank system. Made tests for bank admin and customer tests
+4. - Collective effort on debugging and fixing merge errors
 
-Don't forget to use Test-Driven Development (TDD)
-1. Write Class and Method Function Headers
-2. Write Tests
-3. Implement Method Functions
-
-Good Luck!
+TDD was used for the most part!
 
