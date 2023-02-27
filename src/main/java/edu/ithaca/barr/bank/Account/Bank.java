@@ -232,5 +232,4 @@ public class Bank {
     public List<AbstractAccount> getFrozenAccounts(){
         return frozenAccounts;
     }
-
 }

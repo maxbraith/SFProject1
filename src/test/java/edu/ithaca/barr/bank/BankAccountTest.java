@@ -2,6 +2,8 @@ package edu.ithaca.barr.bank;
 import org.junit.jupiter.api.Test;
 
 import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
+import edu.ithaca.barr.bank.customer.Customer;
+import edu.ithaca.barr.bank.account.Bank;
 import edu.ithaca.barr.bank.account.BankAccount;
 import edu.ithaca.barr.bank.account.CheckingAccount;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
@@ -190,46 +192,59 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("test@mail.com", null, 10.001));
     }
 
-    //Bank System Tests --written but need to implement
     @Test
-    void checkMoneyTotalTest(){
-        BankAdminSoftware bank = new BankAdminSoftware();
-        BankTeller teller = new BankTeller();
-        teller.createAccount("a@c.com", "abcd", 0, bank);
-        teller.createAccount("a@a.com", "abcd", 0, bank);
-        teller.createAccount("a@b.com", "abcd", 0, bank);
-        assertEquals(0, bank.checkMoneyTotal());
-        teller.deposit(bank.allAccounts[0], 1);
-        teller.deposit(bank.allAccounts[1], 2);
-        teller.deposit(bank.allAccounts[2], 3);
+    void checkMoneyTotalTest() throws InsufficientFundsException{
+        BankAdminSoftware initialAdmin = new BankAdminSoftware(0, "password");
+        Bank bank = new Bank();
+        bank.addAdmin(initialAdmin);
+    
+        BankTeller initialTeller = new BankTeller(0, "password");
+        bank.addTeller(initialTeller);
+    
+        Customer initialCustomer1 = new Customer(0, "password");
+        bank.addCustomer(initialCustomer1);
+    
+        Customer initialCustomer2 = new Customer(0, "password");
+        bank.addCustomer(initialCustomer2);
+    
+        Customer initialCustomer3 = new Customer(0, "password");
+        bank.addCustomer(initialCustomer3);
+    
+        bank.createNewAccount(initialTeller, initialCustomer1, 0, 0, 0, 1);
+        bank.createNewAccount(initialTeller, initialCustomer2, 0, 0, 0, 2);
+        bank.createNewAccount(initialTeller, initialCustomer3, 0, 0, 0, 3);
         assertEquals(6, bank.checkMoneyTotal());
-        teller.createAccount("a@d.com", "abcd", 4, bank);
-        assertEquals(10, bank.checkMoneyTotal());
-        teller.createAccount("a@e.com", "abcd", 5, bank);
-        assertEquals(15, bank.checkMoneyTotal());
-        teller.createAccount("a@f.com", "abcd", 6, bank);
-        assertEquals(21, bank.checkMoneyTotal());
-        teller.withdraw(bank.allAccounts[4], 3);
+        initialTeller.deposit(bank.getAllAccounts().get(0), 1);
+        initialTeller.deposit(bank.getAllAccounts().get(1), 2);
+        initialTeller.deposit(bank.getAllAccounts().get(2), 3);
+        assertEquals(12, bank.checkMoneyTotal());
+        initialTeller.createAccount(initialCustomer1, 0, 0, 0, 4);
+        assertEquals(12, bank.checkMoneyTotal());
+        initialTeller.createAccount(initialCustomer2, 0, 0, 0, 5);
         assertEquals(18, bank.checkMoneyTotal());
-        teller.withdraw(bank.allAccounts[3], 1);
+        initialTeller.createAccount(initialCustomer1, 0, 0, 0, 6);
+        assertEquals(27, bank.checkMoneyTotal());
+        initialTeller.withdraw(bank.getAllAccounts().get(4), 3);
+        assertEquals(24, bank.checkMoneyTotal());
+        initialTeller.withdraw(bank.getAllAccounts().get(3), 1);
+        assertEquals(23, bank.checkMoneyTotal());
+        initialTeller.withdraw(bank.getAllAccounts().get(5), 6);
         assertEquals(17, bank.checkMoneyTotal());
-        teller.withdraw(bank.allAccounts[5], 6);
+        initialTeller.transfer(2, bank.getAllAccounts().get(4), bank.getAllAccounts().get(0));
+        initialTeller.transfer(3, bank.getAllAccounts().get(2), bank.getAllAccounts().get(0));
         assertEquals(11, bank.checkMoneyTotal());
-        teller.transfer(2, bank.allAccounts[4], bank.allAccounts[0]);
-        teller.transfer(3, bank.allAccounts[2], bank.allAccounts[0]);
+        initialAdmin.freezeAccount(bank.getAllAccounts().get(5), bank);
+        initialAdmin.freezeAccount(bank.getAllAccounts().get(4), bank);
+        initialAdmin.freezeAccount(bank.getAllAccounts().get(3), bank);
         assertEquals(11, bank.checkMoneyTotal());
-        bank.freezeAccount(bank.allAccounts[5]);
-        bank.freezeAccount(bank.allAccounts[4]);
-        bank.freezeAccount(bank.allAccounts[3]);
+        initialAdmin.unfreezeAccount(bank.getAllAccounts().get(5), bank);
+        initialAdmin.unfreezeAccount(bank.getAllAccounts().get(4), bank);
+        initialAdmin.unfreezeAccount(bank.getAllAccounts().get(3), bank);
         assertEquals(11, bank.checkMoneyTotal());
-        bank.unfreezeAccount(bank.allAccounts[5]);
-        bank.unfreezeAccount(bank.allAccounts[4]);
-        bank.unfreezeAccount(bank.allAccounts[3]);
+        initialTeller.closeAccount(bank.getAllAccounts().get(5), bank);
+        initialTeller.closeAccount(bank.getAllAccounts().get(2), bank);
         assertEquals(11, bank.checkMoneyTotal());
-        teller.closeAccount(bank.allAccounts[5], bank);
-        teller.closeAccount(bank.allAccounts[2], bank);
-        assertEquals(11, bank.checkMoneyTotal());
-        }
+    }
 
     @Test
     void accountsTest(){
