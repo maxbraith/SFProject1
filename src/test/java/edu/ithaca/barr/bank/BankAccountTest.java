@@ -237,27 +237,27 @@ class BankAccountTest {
     void accountsTest(){
         BankAdminSoftware bank = new BankAdminSoftware();
         BankTeller teller = new BankTeller();
-        assertEquals(0,bank.allaccounts.size());
+        assertEquals(0,bank.allAccounts.size());
         teller.createAccount("a@c.com", "abcd", 0, bank);
-        assertEquals(1,bank.allaccounts.size());
+        assertEquals(1,bank.allAccounts.size());
         teller.createAccount("a@a.com", "abcd", 0, bank);
-        assertEquals(2,bank.allaccounts.size());
+        assertEquals(2,bank.allAccounts.size());
         teller.createAccount("a@b.com", "abcd", 0, bank);
-        assertEquals(3,bank.allaccounts.size());
+        assertEquals(3,bank.allAccounts.size());
         bank.freezeAccount(bank.allAccounts.get(0));
         bank.freezeAccount(bank.allAccounts.get(1));
         bank.freezeAccount(bank.allAccounts.get(2));
-        assertEquals(3,bank.allaccounts.size());
+        assertEquals(3,bank.allAccounts.size());
         bank.unfreezeAccount(bank.allAccounts.get(0));
         bank.unfreezeAccount(bank.allAccounts.get(1));
         bank.unfreezeAccount(bank.allAccounts.get(2));
-        assertEquals(3,bank.allaccounts.size());
+        assertEquals(3,bank.allAccounts.size());
         teller.closeAccount(bank.allAccounts.get(2), bank);
-        assertEquals(2,bank.allaccounts.size());
+        assertEquals(2,bank.allAccounts.size());
         teller.closeAccount(bank.allAccounts.get(1), bank);
-        assertEquals(1,bank.allaccounts.size());
+        assertEquals(1,bank.allAccounts.size());
         teller.closeAccount(bank.allAccounts.get(0), bank);
-        assertEquals(0,bank.allaccounts.size());
+        assertEquals(0,bank.allAccounts.size());
     }
 
     @Test
