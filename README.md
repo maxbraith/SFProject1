@@ -33,6 +33,6 @@ Which classes & methods do you need to implement for these use cases?
 2. - Matt implements all Account classes (in Account Folder) including Bank and user interface, as well as helped implement teller. 
 3. - Max implmented all of Custmer and helped with teller, and bank system. Made tests for bank admin and customer tests
 4. - Collective effort on debugging and fixing merge errors
+5. - Everyone contributed to the diagrams equally for the most part. Code reviews were held with each other to discuss better implementation and trouble shooting errors. There were a lot of merge conflicts which were also resolved through collaborate efforts. 
 
 TDD was used for the most part!
-
