@@ -2,6 +2,7 @@ package edu.ithaca.barr.bank.teller;
 
 import edu.ithaca.barr.bank.Software;
 import edu.ithaca.barr.bank.account.AbstractAccount;
+import edu.ithaca.barr.bank.account.Bank;
 import edu.ithaca.barr.bank.account.BankAccount;
 import edu.ithaca.barr.bank.account.CheckingAccount;
 import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
@@ -114,14 +115,14 @@ public class BankTeller implements Software{
      * @param starting balance - amount user puts into the account when they open
      * @throws InvalidArgumentException if email or starting balance is not valid, if email already exists in system
      */
-    public void createAccount(String email, String password, double startingBalance, BankAdminSoftware adminSoftware){
-        for (int i=0; i<adminSoftware.allAccounts.size(); i++){
-            if (adminSoftware.allAccounts[i].getEmail()==email){
+    public void createAccount(String email, String password, double startingBalance, Bank bank){
+        for (int i=0; i<bank.accounts.size(); i++){
+            if (bank.accounts.get(i).getEmail()==email){
                 throw new IllegalArgumentException("Email already exists in system");
             }
         }
         BankAccount account = new BankAccount(email, password, startingBalance);
-        adminSoftware.allAccounts.add(account);
+        bank.accounts.add(account);
         
     }
 
@@ -130,14 +131,14 @@ public class BankTeller implements Software{
      * @param ID - ID for specific account to remove
      * @throws InvalidArgumentException if account does not exist
      */
-    public void closeAccount(AbstractAccount account, BankAdminSoftware adminSoftware){
+    public void closeAccount(AbstractAccount account, Bank bank){
        if (account.getBalance()>0){
-            adminSoftware.allAccounts.remove(account);
-            if (adminSoftware.suspiciousAccounts.contains(account)){
-                adminSoftware.suspiciousAccounts.remove(account);
+            bank.accounts.remove(account);
+            if (bank.flaggedAccounts.contains(account)){
+                bank.flaggedAccounts.remove(account);
             }
-            if (adminSoftware.frozenAccounts.contains(account)){
-                adminSoftware.frozenAccounts.remove(account);
+            if (bank.frozenAccounts.contains(account)){
+                bank.frozenAccounts.remove(account);
             }
        }
        else{
