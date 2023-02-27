@@ -13,7 +13,7 @@ import edu.ithaca.barr.bank.teller.BankTeller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.nio.file.AccessDeniedException;
+import javax.security.auth.login.AccountNotFoundException;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -286,11 +286,32 @@ class BankAccountTest {
     }
 
     @Test
-    void reportSuspiciousAccountsTest(){
-        //create a bunch of accounts and add it to report suspicious accounts, ensuring that the method is returning everything
-        //correctly in a list
-        //ensure if you pass invalid id in it throws an error
-        //remove a bunch of accounts from the list and check if they are there anymore
+    void markSuspiciousAccountsTest() throws AccountNotFoundException{
+        Bank bank = new Bank();
+        BankAdminSoftware bankad = new BankAdminSoftware(333, "fk");
+        bank.addAdmin(bankad);
+        BankTeller teller = new BankTeller(333, "jri");
+        Customer initialCustomer1 = new Customer(0, "password");
+        bank.addCustomer(initialCustomer1);
+        Customer initialCustomer2 = new Customer(0, "password");
+        bank.addCustomer(initialCustomer2);
+        bank.createNewAccount(teller, initialCustomer1, 0, 0, 0, 0);
+        bank.createNewAccount(teller, initialCustomer1, 1, 0, 0, 0);
+        bank.createNewAccount(teller, initialCustomer2, 1, 0, 0, 0);
+        assertEquals(0,bank.flaggedAccounts.size());
+        bankad.markAsSuspiscious(initialCustomer1.getCheckingAccount(), bank);
+        assertEquals(1,bank.flaggedAccounts.size());
+        bankad.markAsSuspiscious(initialCustomer1.getSavingsAccount(), bank);
+        assertEquals(2,bank.flaggedAccounts.size());
+        bankad.markAsSuspiscious(initialCustomer2.getSavingsAccount(), bank);
+        assertEquals(3,bank.flaggedAccounts.size());
+        Assertions.assertThrows(AccountNotFoundException.class, ()-> bankad.markAsSuspiscious(initialCustomer2.getCheckingAccount(), bank));
+        bankad.unMarkAsSuspicious(initialCustomer1.getCheckingAccount(), bank);
+        assertEquals(2,bank.flaggedAccounts.size());
+        bankad.unMarkAsSuspicious(initialCustomer2.getSavingsAccount(), bank);
+        assertEquals(1,bank.flaggedAccounts.size());
+        bankad.unMarkAsSuspicious(initialCustomer1.getSavingsAccount(), bank);
+        assertEquals(0,bank.flaggedAccounts.size());
     }
 
     @Test

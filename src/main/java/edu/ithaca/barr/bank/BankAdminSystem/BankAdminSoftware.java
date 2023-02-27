@@ -3,6 +3,8 @@ package edu.ithaca.barr.bank.bankadminsystem;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 import edu.ithaca.barr.bank.account.AbstractAccount;
 import edu.ithaca.barr.bank.account.Bank;
 
@@ -58,8 +60,20 @@ public class BankAdminSoftware {
         return password;
     }
 
-    public void markAsSuspiscious(AbstractAccount account, Bank bank){
+    public void markAsSuspiscious(AbstractAccount account, Bank bank) throws AccountNotFoundException{
+        if (bank.accounts.contains(account))
         bank.flaggedAccounts.add(account);
+        else{
+            throw new AccountNotFoundException();
+        }
+    }
+
+    public void unMarkAsSuspicious(AbstractAccount account, Bank bank) throws AccountNotFoundException{
+        if (bank.accounts.contains(account))
+        bank.flaggedAccounts.remove(account);
+        else{
+            throw new AccountNotFoundException();
+        }
     }
     
 }
