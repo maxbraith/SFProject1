@@ -5,7 +5,6 @@ import edu.ithaca.barr.bank.account.AbstractAccount;
 import edu.ithaca.barr.bank.account.Bank;
 import edu.ithaca.barr.bank.account.BankAccount;
 import edu.ithaca.barr.bank.account.CheckingAccount;
-import edu.ithaca.barr.bank.bankadminsystem.BankAdminSoftware;
 import edu.ithaca.barr.bank.customer.Customer;
 import edu.ithaca.barr.bank.account.InsufficientFundsException;
 //Class name Bank Teller, has confirmCredentials,checkBalance,withdraw,deposit,transfer,checkHistory
