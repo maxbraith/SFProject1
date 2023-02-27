@@ -2,8 +2,7 @@ package edu.ithaca.barr.bank.account;
 
 import java.util.ArrayList;
 
-//Matthew Weil
-
+//Written by Matthew Weil
 public class SavingsAccount extends AbstractAccount{
 
     final double initialWithdrawLimit;

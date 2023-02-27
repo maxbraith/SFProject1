@@ -1,6 +1,6 @@
 package edu.ithaca.barr.bank.account;
 
-//Matthew Weil
+//Written by Matthew Weil
 public class BankAccount extends AbstractAccount {
 
     private String email;
@@ -171,7 +171,5 @@ public class BankAccount extends AbstractAccount {
 
     @Override
     public void transfer(double amount, AbstractAccount transferee) throws InsufficientFundsException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'transfer'");
     }
 }

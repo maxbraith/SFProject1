@@ -2,7 +2,7 @@ package edu.ithaca.barr.bank.account;
 
 import java.util.List;
 
-//Matthew Weil
+//Written by Matthew Weil
 public abstract class AbstractAccount {
     String email;
     public double balance;
@@ -28,7 +28,7 @@ public abstract class AbstractAccount {
     * @post increases the balance by @param amount if amount is non-negative
     */
     public void deposit(double amount) throws IllegalArgumentException{
-        if (isNumberValid(amount) && (!this.isFrozen)) {
+        if (isNumberValid(amount)) {
             balance += amount;
             balance = Math.round(balance * 100.0) / 100.0;
             appendTransaction(amount, "deposit");
