@@ -9,7 +9,10 @@ import edu.ithaca.barr.bank.customer.Customer;
 
 public class Bank {
 
-    public List<AbstractAccount> accounts;
+    public ArrayList<AbstractAccount> flaggedAccounts;
+    public ArrayList<AbstractAccount> frozenAccounts;
+
+    public ArrayList<AbstractAccount> accounts;
     private List<BankTeller> tellers;
     private List<BankAdminSoftware> admins;
     private List<Customer> customers;
@@ -132,13 +135,6 @@ public class Bank {
         customers.add(customer);
     }
 
-    /**
-     * get the list of accounts
-     * @return list of accounts
-     */
-    public List<AbstractAccount> getAccounts(){
-        return accounts;
-    }
 
     /**
      * gets the list of tellers
@@ -212,6 +208,24 @@ public class Bank {
             }
         }
         
+    }
+
+    /**
+     * @return ArrayList of accounts
+     */
+    public ArrayList<AbstractAccount> getAllAccounts(){
+        return accounts;
+    }
+
+    /**
+     * @return ArrayList of suspiscious accounts
+     */
+    public ArrayList<AbstractAccount> getFlaggedAccounts(){
+        return flaggedAccounts;
+    }
+
+    public ArrayList<AbstractAccount> getFrozenAccounts(){
+        return frozenAccounts;
     }
 
 }
