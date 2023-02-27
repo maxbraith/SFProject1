@@ -23,8 +23,8 @@ User Test Script:
 https://docs.google.com/document/d/1sr0zxev-SQyUGWaW2sRo2NDkQD63FSHf9YlJe7jB_Ro/edit?usp=sharing
 
 Three Use Cases that you will implement first:
-1. - atm interactions
-2. - teller interactions
+1. - ATM/Bank interactions
+2. - Teller interactions
 3. - Account interactions
 
 Which classes & methods do you need to implement for these use cases?
