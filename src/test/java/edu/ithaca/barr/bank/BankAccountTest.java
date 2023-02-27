@@ -241,17 +241,18 @@ class BankAccountTest {
         teller.transfer(2, bank1.accounts.get(4), bank1.accounts.get(0));
         teller.transfer(3, bank1.accounts.get(2), bank1.accounts.get(0));
         assertEquals(11, bank1.checkMoneyTotal());
-        admin.freezeAccount(bank1.accounts.get(5));
-        bank1.freezeAccount(bank1.accounts.get(4));
-        bank1.freezeAccount(bank1.accounts.get(3));
-        assertEquals(11, bank.checkMoneyTotal());
-        bank1.unfreezeAccount(bank1.accounts.get(5));
-        bank1.unfreezeAccount(bank1.accounts.get(4));
-        bank1.unfreezeAccount(bank1.accounts.get(3));
-        assertEquals(11, bank.checkMoneyTotal());
+        bank.freezeAccount(bank1.accounts.get(5));
+        bank.freezeAccount(bank1.accounts.get(4));
+        bank.freezeAccount(bank1.accounts.get(3));
+        assertEquals(11, bank1.checkMoneyTotal());
+        bank.unfreezeAccount(bank1.accounts.get(5));
+        bank.unfreezeAccount(bank1.accounts.get(4));
+        bank.unfreezeAccount(bank1.accounts.get(3));
+        assertEquals(11, bank1.checkMoneyTotal());
+        bank
         teller.closeAccount(bank1.accounts.get(5), bank);
         teller.closeAccount(bank1.accounts.get(2), bank);
-        assertEquals(11, bank.checkMoneyTotal());
+        assertEquals(11, bank1.checkMoneyTotal());
         }
 
     @Test
