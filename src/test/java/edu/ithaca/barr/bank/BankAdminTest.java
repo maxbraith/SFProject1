@@ -7,7 +7,7 @@ public class BankAdminTest {
     
     @Test
     void getMoneyTotalTest(){
-        
+        Bank bank = new Bank
     }
     
 }
