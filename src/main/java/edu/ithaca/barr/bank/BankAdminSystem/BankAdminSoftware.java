@@ -1,29 +1,31 @@
 package edu.ithaca.barr.bank.bankadminsystem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.ithaca.barr.bank.account.AbstractAccount;
+import edu.ithaca.barr.bank.account.Bank;
 
+//Max Braithwaite
 public class BankAdminSoftware {
-    public ArrayList<AbstractAccount> allAccounts;
-    public ArrayList<AbstractAccount> flaggedAccounts;
-    public ArrayList<AbstractAccount> frozenAccounts;
-    public  ArrayList<AbstractAccount> suspiciousAccounts;
-    private int adminId;
+    private int adminID;
     private String password;
 
-    public BankAdminSoftware(int adminId, String password){
-        this.adminId = adminId;
+    public BankAdminSoftware(int adminID, String password){
+        this.adminID = adminID;
         this.password = password;
     }
+
+
+
     /**
      * @post returns total money across all accounts
      * @return - double of total money
      */
-    public double checkMoneyTotal(){
+    public double checkMoneyTotal(Bank bank){
         double total=0;
-        for(int i=0; i<allAccounts.size(); i++){
-            total += allAccounts.get(i).getBalance();
+        for(int i=0; i<bank.getAllAccounts().size(); i++){
+            total += bank.getAllAccounts().get(i).getBalance();
         }
         return total;
     }
@@ -32,14 +34,14 @@ public class BankAdminSoftware {
      * @post returns array of all accounts flagged as suspiscious
      * @return - array of suspiscious accounts
      */
-    public ArrayList<AbstractAccount> reportOfSuspisciousAccounts(){
-        return flaggedAccounts;
+    public List<AbstractAccount> reportOfSuspisciousAccounts(Bank bank){
+        return bank.getFlaggedAccounts();
     }
 
     /**
      * @post marks an account as frozen
      */
-    public void freezeAccount(AbstractAccount account){
+    public void freezeAccount(AbstractAccount account, Bank bank){
         account.freeze();
         if (frozenAccounts == null) {
             frozenAccounts = new ArrayList<AbstractAccount>();
@@ -50,23 +52,11 @@ public class BankAdminSoftware {
     /**
      * @post unfreezes an account
      */
-    public void unfreezeAccount(AbstractAccount account){
+    public void unfreezeAccount(AbstractAccount account, Bank bank){
         account.unfreeze();
-        frozenAccounts.remove(account);
+        bank.frozenAccounts.remove(account);
     }
 
-        /**
-     * Get the id of the admin
-     * @return id of admin
-     */
-    public int getId(){
-        return adminId;
-    }
-
-    /**
-     * get password of admin
-     * @return password of admin
-     */
     public String getPassword(){
         return password;
     }
