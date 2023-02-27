@@ -348,9 +348,9 @@ public class UserInterface {
                 if (choice < 0 || choice > 2){
                     throw new Exception();
                 }if (choice == 0){
-                    System.out.println(admin.checkMoneyTotal());
+                    System.out.println(admin.checkMoneyTotal(bank));
                 }else if (choice == 1){
-                    System.out.println(admin.reportOfSuspisciousAccounts());
+                    System.out.println(admin.reportOfSuspisciousAccounts(bank));
                 }else{
                     done = true;
                 }

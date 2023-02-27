@@ -57,5 +57,9 @@ public class BankAdminSoftware {
     public String getPassword(){
         return password;
     }
+
+    public void markAsSuspiscious(AbstractAccount account, Bank bank){
+        bank.flaggedAccounts.add(account);
+    }
     
 }

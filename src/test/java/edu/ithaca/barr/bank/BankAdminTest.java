@@ -21,14 +21,14 @@ public class BankAdminTest {
         //Equivalence Partition - No accounts in arrayList
         assertEquals(0, testAdmin.checkMoneyTotal(bank));
 
-        teller.createAccount("abc@abc.com", "234", 0, testAdmin);
+        teller.createAccount("abc@abc.com", "234", 0, bank);
         //Equivalence Partition - Empty balance in arrayList
-        
+        assertEquals(0, testAdmin.checkMoneyTotal(bank));
 
-
-        
-
-
+        teller.createAccount("anc@abc.com", "234", 100, bank);
+        teller.createAccount("alc@abc.com", "123", 100, bank);
+        //Equivalence Partition - Balance of 200 in arrayList
+        assertEquals(200, testAdmin.checkMoneyTotal(bank));
         
         
     }
