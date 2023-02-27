@@ -136,7 +136,7 @@ public class BankTeller implements Software{
      * @throws InvalidArgumentException if account does not exist
      */
     public void closeAccount(AbstractAccount account, Bank bank){
-       if (account.getBalance()>0){
+       if (account.getBalance()==0){
             bank.accounts.remove(account);
             if (bank.flaggedAccounts.contains(account)){
                 bank.flaggedAccounts.remove(account);
