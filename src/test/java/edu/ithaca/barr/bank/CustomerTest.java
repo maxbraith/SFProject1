@@ -42,11 +42,11 @@ public class CustomerTest {
         CheckingAccount testAccount = new CheckingAccount(550);
         SavingsAccount testAccount2 = new SavingsAccount(500, 500, 0);
         //Equivalence Partition - accounts are null
-        assertThrows(NullPointerException.class, ()-> testCustomer.getBalance());
+        assertEquals(0, testCustomer.getBalance());
         
         testCustomer.setCheckingAccount(testAccount);
         //Equivalence Partition - one account is null
-        assertThrows(NullPointerException.class, ()-> testCustomer.getBalance());
+        assertEquals(550, testCustomer.getBalance());
         
         testCustomer.setSavingsAccount(testAccount2);
         //Equivalence Partition - balance is not zero

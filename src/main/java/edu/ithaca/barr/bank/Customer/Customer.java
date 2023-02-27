@@ -56,13 +56,18 @@ public class Customer {
      * @return total amount of money the customer has in their accounts
      */
     public double getBalance(){
-        double total = 0;
-        try{
-            total = total + checkingAccount.getBalance();
-        }catch(IllegalArgumentException e){}
-        try{
-            total = total + savingsAccount.getBalance();
-        }catch(IllegalArgumentException e){}
+        double total = 0.0;
+
+        if(checkingAccount != null){
+            try{
+                total = total + checkingAccount.getBalance();
+            }catch(IllegalArgumentException e){}
+        }
+        if(savingsAccount != null){
+            try{
+                total = total + savingsAccount.getBalance();
+            }catch(IllegalArgumentException e){}
+        }
         return total;
     }
 
