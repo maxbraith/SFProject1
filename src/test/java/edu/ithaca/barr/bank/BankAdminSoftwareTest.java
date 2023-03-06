@@ -45,7 +45,7 @@ public class BankAdminSoftwareTest {
         bank.createNewAccount(initialTeller, initialCustomer2, 0, 0, 0, 2);
         bank.createNewAccount(initialTeller, initialCustomer3, 0, 0, 0, 3);
         assertEquals(6, bank.checkMoneyTotal());
-        initialTeller.deposit(bank.getAllAccounts().get(0), 1);
+        initialTeller.deposit(bank.getAllAccounts().get(0), 1);//integration test- deposit must be able to work
         initialTeller.deposit(bank.getAllAccounts().get(1), 2);
         initialTeller.deposit(bank.getAllAccounts().get(2), 3);
         assertEquals(12, bank.checkMoneyTotal());
@@ -56,21 +56,21 @@ public class BankAdminSoftwareTest {
         assertEquals(18, bank.checkMoneyTotal());
         bank.createNewAccount(initialTeller,initialCustomer2,1,50,0,9);
         assertEquals(27, bank.checkMoneyTotal());
-        initialTeller.withdraw(bank.getAllAccounts().get(4), 3);
+        initialTeller.withdraw(bank.getAllAccounts().get(4), 3); //integration test- withdraw must be able to work
         assertEquals(24, bank.checkMoneyTotal());
         initialTeller.withdraw(bank.getAllAccounts().get(3), 1);
         assertEquals(23, bank.checkMoneyTotal());
         initialTeller.withdraw(bank.getAllAccounts().get(4), 6);
         assertEquals(17, bank.checkMoneyTotal());
-        initialTeller.transfer(2, bank.getAllAccounts().get(3), bank.getAllAccounts().get(0));
+        initialTeller.transfer(2, bank.getAllAccounts().get(3), bank.getAllAccounts().get(0)); //integration test- transfer must be able to not affect check money total
         initialTeller.transfer(3, bank.getAllAccounts().get(2), bank.getAllAccounts().get(0));
         assertEquals(17, bank.checkMoneyTotal());
         initialAdmin.freezeAccount(bank.getAllAccounts().get(2), bank);
-        initialAdmin.freezeAccount(bank.getAllAccounts().get(4), bank);
+        initialAdmin.freezeAccount(bank.getAllAccounts().get(4), bank); //integration test- freeze must be able to not affect check money total
         initialAdmin.freezeAccount(bank.getAllAccounts().get(3), bank);
         assertEquals(17, bank.checkMoneyTotal());
         initialAdmin.unfreezeAccount(bank.getAllAccounts().get(2), bank);
-        initialAdmin.unfreezeAccount(bank.getAllAccounts().get(4), bank);
+        initialAdmin.unfreezeAccount(bank.getAllAccounts().get(4), bank); //integration test- unfreeze must be able to not affect check money total
         initialAdmin.unfreezeAccount(bank.getAllAccounts().get(3), bank);
         assertEquals(17, bank.checkMoneyTotal());
         initialTeller.closeAccount(bank.getAllAccounts().get(4), bank);
@@ -95,10 +95,10 @@ public class BankAdminSoftwareTest {
         bank.createNewAccount(teller, initialCustomer2, 1, 0, 0, 0);
         assertEquals(3,bank.accounts.size());
         bankad.freezeAccount(bank.accounts.get(0), bank);
-        bankad.freezeAccount(bank.accounts.get(1), bank);
+        bankad.freezeAccount(bank.accounts.get(1), bank); //integration test- freeze must be able to not affect accounts
         bankad.freezeAccount(bank.accounts.get(2), bank);
         assertEquals(3,bank.accounts.size());
-        bankad.unfreezeAccount(bank.accounts.get(0), bank);
+        bankad.unfreezeAccount(bank.accounts.get(0), bank); //integration test- unfreeze must be able to not affect accounts
         bankad.unfreezeAccount(bank.accounts.get(1), bank);
         bankad.unfreezeAccount(bank.accounts.get(2), bank);
         assertEquals(3,bank.accounts.size());
@@ -167,9 +167,9 @@ public class BankAdminSoftwareTest {
         assertEquals(true, bank.accounts.get(0).getStatus());
         assertEquals(true, bank.accounts.get(1).getStatus());
         assertEquals(true, bank.accounts.get(2).getStatus());
-        Assertions.assertThrows(InsufficientFundsException.class, ()-> bank.accounts.get(0).withdraw(1));
-        Assertions.assertThrows(IllegalArgumentException.class, ()-> bank.accounts.get(1).deposit(1));
-        Assertions.assertThrows(InsufficientFundsException.class, ()-> teller.transfer(1,bank.accounts.get(2),bank.accounts.get(1)));
+        Assertions.assertThrows(InsufficientFundsException.class, ()-> bank.accounts.get(0).withdraw(1)); //integration test- withdraw cannot work if frozen is true
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> bank.accounts.get(1).deposit(1)); //integration test- deposit cannot work if frozen is true
+        Assertions.assertThrows(InsufficientFundsException.class, ()-> teller.transfer(1,bank.accounts.get(2),bank.accounts.get(1))); //integration test- transfer cannot work if frozen is true
         assertEquals(3, bank.frozenAccounts.size());
         Assertions.assertThrows(IndexOutOfBoundsException.class, ()-> bankad.freezeAccount(bank.accounts.get(5),bank));
         bankad.unfreezeAccount(bank.accounts.get(0),bank);
