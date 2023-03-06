@@ -19,6 +19,9 @@ Giovanni Cioffi - https://drive.google.com/file/d/1XgCeChpjP8vbpQscl081KtdMRmBvQ
 Matt Weil - https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#G19wsyS_N-vG0dG4GBNkn03pqPmH3b-wIp
 Max Braithwaite - https://docs.google.com/document/d/1FxSNurYp7KBOIlfB9QipFUO-qdzDWcx9kUbtPzC6vfc/edit?usp=sharing
 
+State Diagram: 
+https://drive.google.com/file/d/1eKeuhNUTdlQAeLfuTKuw_IU-3PdZgrEy/view?usp=sharing
+
 User Test Script:
 https://docs.google.com/document/d/1sr0zxev-SQyUGWaW2sRo2NDkQD63FSHf9YlJe7jB_Ro/edit?usp=sharing
 
