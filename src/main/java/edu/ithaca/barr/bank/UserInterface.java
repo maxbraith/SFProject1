@@ -154,10 +154,10 @@ public class UserInterface {
             }
         }
         else if (choice == 3){
-            System.out.println("Which account would you like to transfer from? (0 for savings, 1 for checkings)");
+            System.out.println("Which account would you like to transfer from? (0 for savings, 1 for checking)");
             try{
                 int account = in.nextInt();
-                System.out.println("How much would you like to trasfer?");
+                System.out.println("How much would you like to transfer?");
                 try{
                     double amount = in.nextDouble();
                     System.out.println("Enter the id of the customer you wish to transfer the money to");
