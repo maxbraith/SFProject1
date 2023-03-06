@@ -61,4 +61,22 @@ public class CustomerTest {
 
     }
 
+
+    //Integration tests - Max
+    @Test
+    void integrationCustomerTests() throws InsufficientFundsException{
+        Customer testCustomer = new Customer(222, "password");
+        SavingsAccount testSavings = new SavingsAccount(0, 500, 0);
+        CheckingAccount testCheckings = new CheckingAccount(0);
+        testCustomer.setCheckingAccount(testCheckings);
+        testCustomer.setSavingsAccount(testSavings);
+        //Uses teller for deposit and withdraw method
+        testCustomer.depositCheckingAccount(1000);
+        testCustomer.depositSavingsAccount(500);
+        //getBalance uses methods from specific accounts
+        assertEquals(1500, testCustomer.getBalance());
+        testCustomer.withdrawSavingsAccount(250);
+        assertEquals(1250, testCustomer.getBalance());
+    }
+
 }
